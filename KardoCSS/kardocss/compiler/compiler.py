@@ -13,6 +13,11 @@ from kardocss.utilities.typography import generate_typography_utilities
 from kardocss.utilities.layout import generate_layout_utilities
 from kardocss.utilities.borders import generate_border_utilities
 from kardocss.utilities.sizing import generate_sizing_utilities
+from kardocss.utilities.forms import generate_form_utilities
+from kardocss.utilities.badges import generate_badge_utilities
+from kardocss.utilities.gradients import generate_gradient_utilities
+from kardocss.utilities.components import generate_components
+from kardocss.utilities.effects import generate_effects
 
 
 class KardoCSSCompiler:
@@ -125,6 +130,21 @@ class KardoCSSCompiler:
         # Sizing (width, height)
         utilities.extend(generate_sizing_utilities(self.config, prefix))
         
+        # Forms (inputs, buttons, etc.)
+        utilities.append(generate_form_utilities())
+        
+        # Badges
+        utilities.append(generate_badge_utilities(self.config))
+        
+        # Gradients
+        utilities.append(generate_gradient_utilities(self.config))
+        
+        # Components
+        utilities.append(generate_components())
+        
+        # Effects
+        utilities.append(generate_effects())
+        
         self.utilities = utilities
     
     def _combine_styles(self) -> str:
@@ -140,7 +160,13 @@ class KardoCSSCompiler:
         all_styles.append("")
         
         # Agregar utilidades
-        all_styles.extend(self.utilities)
+        for utility in self.utilities:
+            if isinstance(utility, str):
+                all_styles.append(utility)
+            elif isinstance(utility, list):
+                all_styles.extend(utility)
+            else:
+                all_styles.append(str(utility))
         
         # Generar responsive variants
         all_styles.append("")
