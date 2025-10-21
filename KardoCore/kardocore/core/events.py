@@ -6,7 +6,7 @@ componentes del framework, especialmente para la integración de IA y plugins.
 """
 
 import asyncio
-from typing import Any, Callable, Dict, List
+from typing import Any, Callable, Dict, List, Optional
 from functools import wraps
 import inspect
 
@@ -38,7 +38,7 @@ class EventManager:
         
         self._listeners[event_name].append(handler)
     
-    def off(self, event_name: str, handler: Callable | None = None) -> None:
+    def off(self, event_name: str, handler: Optional[Callable] = None) -> None:
         """
         Desregistra un listener de un evento.
         
@@ -133,7 +133,7 @@ class EventManager:
         if len(self._event_history) > self._max_history:
             self._event_history = self._event_history[-self._max_history:]
     
-    def get_history(self, event_name: str | None = None, limit: int = 100) -> List[Dict[str, Any]]:
+    def get_history(self, event_name: Optional[str] = None, limit: int = 100) -> List[Dict[str, Any]]:
         """
         Obtiene el historial de eventos.
         
@@ -201,7 +201,7 @@ def on(event_name: str, handler: Callable) -> None:
     _event_manager.on(event_name, handler)
 
 
-def off(event_name: str, handler: Callable | None = None) -> None:
+def off(event_name: str, handler: Optional[Callable] = None) -> None:
     """Desregistra un listener de un evento."""
     _event_manager.off(event_name, handler)
 

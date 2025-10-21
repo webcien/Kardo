@@ -10,7 +10,7 @@ readme_file = Path(__file__).parent / "README.md"
 long_description = readme_file.read_text(encoding="utf-8") if readme_file.exists() else ""
 
 # Leer versión
-version = "0.1.0-alpha"
+version = "0.0.9"
 
 setup(
     name="kardocore",
@@ -27,12 +27,12 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.14",
+        "Programming Language :: Python :: 3.11",
         "Framework :: AsyncIO",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         "Topic :: Software Development :: Libraries :: Application Frameworks",
     ],
-    python_requires=">=3.14",
+    python_requires=">=3.11",
     install_requires=[
         # Servidor ASGI
         "uvicorn>=0.30.0",

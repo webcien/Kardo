@@ -5,7 +5,7 @@ Interfaz principal para el sistema de plantillas de KardoCore.
 """
 
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Union
 import hashlib
 
 from kardocore.theme.tokenizer import KardoThemeTokenizer
@@ -38,7 +38,7 @@ class KardoTheme:
     
     def __init__(
         self,
-        template_dir: str | Path,
+        template_dir: Union[str, Path],
         cache_enabled: bool = True,
         auto_escape: bool = True,
     ):

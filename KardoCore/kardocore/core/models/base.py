@@ -6,9 +6,16 @@ Aprovecha la evaluación diferida de anotaciones de Python 3.14 (PEP 649/749).
 """
 
 import inspect
-from typing import Any, Dict, get_type_hints, get_origin, get_args
+from typing import Any, Dict, get_type_hints, get_origin, get_args, Optional, Union, Callable
 from datetime import datetime
-from annotationlib import get_annotations, Format
+# Compatibility for Python 3.11 (annotationlib is only in 3.14+)
+try:
+    from annotationlib import get_annotations, Format
+except ImportError:
+    # Fallback for Python 3.11
+    def get_annotations(obj, *, eval_str=False, format=None):
+        return get_type_hints(obj) if eval_str else getattr(obj, '__annotations__', {})
+    Format = None
 
 
 class ValidationError(Exception):
@@ -35,12 +42,12 @@ class FieldInfo:
         *,
         default: Any = None,
         required: bool = True,
-        min_length: int | None = None,
-        max_length: int | None = None,
-        min_value: int | float | None = None,
-        max_value: int | float | None = None,
-        regex: str | None = None,
-        validator: callable | None = None,
+        min_length: Optional[int] = None,
+        max_length: Optional[int] = None,
+        min_value: Optional[Union[int, float]] = None,
+        max_value: Optional[Union[int, float]] = None,
+        regex: Optional[str] = None,
+        validator: Optional[Callable] = None,
     ):
         self.default = default
         self.required = required
@@ -283,12 +290,12 @@ class KardoModel(metaclass=KardoModelMeta):
 
 
 # Funciones helper para definir campos comunes
-def String(*, min_length: int | None = None, max_length: int | None = None, regex: str | None = None, **kwargs) -> FieldInfo:
+def String(*, min_length: Optional[int] = None, max_length: Optional[int] = None, regex: Optional[str] = None, **kwargs) -> FieldInfo:
     """Helper para campos de tipo string."""
     return FieldInfo(min_length=min_length, max_length=max_length, regex=regex, **kwargs)
 
 
-def Integer(*, min_value: int | None = None, max_value: int | None = None, **kwargs) -> FieldInfo:
+def Integer(*, min_value: Optional[int] = None, max_value: Optional[int] = None, **kwargs) -> FieldInfo:
     """Helper para campos de tipo entero."""
     return FieldInfo(min_value=min_value, max_value=max_value, **kwargs)
 
