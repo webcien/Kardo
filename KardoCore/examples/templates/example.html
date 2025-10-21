@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{page.title}</title>
+    <link rel="stylesheet" href="/static/css/kardocss.min.css">
+</head>
+<body class="k-bg-gray-100">
+    <div class="k-container k-mx-auto k-p-4">
+        <header class="k-mb-8">
+            <h1 class="k-text-4xl k-font-bold k-text-primary k-mb-2">
+                {page.title}
+            </h1>
+            <p class="k-text-lg k-text-gray-600">
+                {page.description}
+            </p>
+        </header>
+
+        <main>
+            {# Ejemplo de condicional #}
+            #if user.is_authenticated
+                <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md k-mb-6">
+                    <h2 class="k-text-2xl k-font-semibold k-mb-4">
+                        Bienvenido, {user.name}
+                    </h2>
+                    <p class="k-text-gray-700">
+                        Email: {user.email}
+                    </p>
+                </div>
+            #else
+                <div class="k-bg-yellow-100 k-p-6 k-rounded-lg k-mb-6">
+                    <p class="k-text-yellow-800">
+                        Por favor, inicia sesión para continuar.
+                    </p>
+                </div>
+            #end
+
+            {# Ejemplo de bucle #}
+            <section class="k-mb-8">
+                <h2 class="k-text-3xl k-font-bold k-mb-4">Artículos Recientes</h2>
+                
+                <div class="k-grid k-grid-cols-1 k-md:grid-cols-2 k-lg:grid-cols-3 k-gap-6">
+                    #for post in posts
+                        <article class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                            <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                                {post.title}
+                            </h3>
+                            <p class="k-text-gray-600 k-mb-4">
+                                {post.excerpt}
+                            </p>
+                            <div class="k-flex k-justify-between k-items-center">
+                                <span class="k-text-sm k-text-gray-500">
+                                    {post.author}
+                                </span>
+                                <a href="/posts/{post.id}" class="k-text-primary k-font-medium">
+                                    Leer más →
+                                </a>
+                            </div>
+                        </article>
+                    #end
+                </div>
+            </section>
+
+            {# Ejemplo de condicional anidado #}
+            #if posts
+                <div class="k-text-center k-mt-8">
+                    <a href="/posts" class="k-btn k-btn-primary k-px-6 k-py-3 k-rounded-lg">
+                        Ver todos los artículos
+                    </a>
+                </div>
+            #else
+                <div class="k-bg-gray-200 k-p-8 k-rounded-lg k-text-center">
+                    <p class="k-text-gray-600">
+                        No hay artículos disponibles en este momento.
+                    </p>
+                </div>
+            #end
+        </main>
+
+        <footer class="k-mt-12 k-pt-8 k-border-t k-border-gray-300 k-text-center">
+            <p class="k-text-gray-600">
+                &copy; 2025 KardoCore. Todos los derechos reservados.
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
+

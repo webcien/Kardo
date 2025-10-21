@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+"""
+KardoCore CLI - Ejecutable principal
+
+Permite crear proyectos KardoCore con un solo comando.
+"""
+
+import sys
+from kardocore.cli.installer import main
+
+if __name__ == "__main__":
+    sys.exit(main())
+

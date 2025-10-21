@@ -1,0 +1,73 @@
+.
+├── KardoCSS
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE
+│   ├── README.md
+│   ├── dist
+│   │   ├── kardocss.css
+│   │   └── kardocss.min.css
+│   ├── examples
+│   │   └── index.html
+│   ├── kardocss
+│   │   ├── __init__.py
+│   │   ├── cli
+│   │   │   ├── __init__.py
+│   │   │   └── build.py
+│   │   ├── compiler
+│   │   │   └── compiler.py
+│   │   ├── core
+│   │   │   ├── __init__.py
+│   │   │   └── config.py
+│   │   ├── docs
+│   │   ├── examples
+│   │   ├── tests
+│   │   ├── themes
+│   │   └── utilities
+│   │       ├── __init__.py
+│   │       ├── borders.py
+│   │       ├── colors.py
+│   │       ├── layout.py
+│   │       ├── sizing.py
+│   │       ├── spacing.py
+│   │       └── typography.py
+│   ├── setup.py
+│   └── test_compile.py
+├── KardoCore
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE
+│   ├── README.md
+│   ├── examples
+│   │   ├── simple_app.py
+│   │   ├── templates
+│   │   │   └── example.html
+│   │   └── theme_example.py
+│   ├── kardocore
+│   │   ├── __init__.py
+│   │   ├── admin
+│   │   ├── ai
+│   │   │   ├── modules
+│   │   │   └── providers
+│   │   ├── cli
+│   │   ├── config
+│   │   ├── core
+│   │   │   ├── __init__.py
+│   │   │   ├── api
+│   │   │   ├── app.py
+│   │   │   ├── auth
+│   │   │   ├── config.py
+│   │   │   ├── events
+│   │   │   ├── events.py
+│   │   │   ├── models
+│   │   │   ├── plugins
+│   │   │   └── utils
+│   │   ├── docs
+│   │   ├── tests
+│   │   └── theme
+│   │       ├── __init__.py
+│   │       ├── engine.py
+│   │       ├── renderer.py
+│   │       └── tokenizer.py
+│   └── setup.py
+└── project_structure.txt
+
+32 directories, 38 files

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KardoCSS - Framework CSS Mobile-First</title>
+    <style>
+        /* Este archivo usaría kardocss.min.css compilado */
+        /* Por ahora, estilos inline para demostración */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5; }
+        .k-container { max-width: 1280px; margin: 0 auto; padding: 1rem; }
+        .k-bg-primary { background-color: #3498db; }
+        .k-bg-white { background-color: #ffffff; }
+        .k-bg-gray-100 { background-color: #f8f9fa; }
+        .k-text-white { color: #ffffff; }
+        .k-text-primary { color: #3498db; }
+        .k-text-gray-700 { color: #495057; }
+        .k-p-4 { padding: 1rem; }
+        .k-p-6 { padding: 1.5rem; }
+        .k-py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .k-mb-2 { margin-bottom: 0.5rem; }
+        .k-mb-4 { margin-bottom: 1rem; }
+        .k-mb-6 { margin-bottom: 1.5rem; }
+        .k-mb-8 { margin-bottom: 2rem; }
+        .k-text-4xl { font-size: 2.25rem; }
+        .k-text-2xl { font-size: 1.5rem; }
+        .k-text-xl { font-size: 1.25rem; }
+        .k-text-lg { font-size: 1.125rem; }
+        .k-font-bold { font-weight: 700; }
+        .k-font-semibold { font-weight: 600; }
+        .k-text-center { text-align: center; }
+        .k-rounded-lg { border-radius: 0.5rem; }
+        .k-shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+        .k-grid { display: grid; }
+        .k-grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .k-gap-6 { gap: 1.5rem; }
+        .k-flex { display: flex; }
+        .k-items-center { align-items: center; }
+        .k-justify-between { justify-content: space-between; }
+        
+        @media (min-width: 768px) {
+            .k-md\\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        
+        @media (min-width: 1024px) {
+            .k-lg\\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+    </style>
+</head>
+<body class="k-bg-gray-100">
+    <!-- Hero Section -->
+    <header class="k-bg-primary k-text-white k-py-12">
+        <div class="k-container k-text-center">
+            <h1 class="k-text-4xl k-font-bold k-mb-4">
+                KardoCSS
+            </h1>
+            <p class="k-text-xl k-mb-6">
+                Framework CSS 100% Mobile-First, Modular y Optimizado
+            </p>
+            <div class="k-flex k-items-center k-justify-center k-gap-4">
+                <a href="#features" class="k-bg-white k-text-primary k-px-6 k-py-3 k-rounded-lg k-font-semibold">
+                    Características
+                </a>
+                <a href="https://github.com/webcien/KardoCSS" class="k-border k-border-white k-text-white k-px-6 k-py-3 k-rounded-lg k-font-semibold">
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="k-container k-py-12">
+        <h2 class="k-text-2xl k-font-bold k-text-center k-mb-8">
+            Características Principales
+        </h2>
+        
+        <div class="k-grid k-grid-cols-1 k-md:grid-cols-2 k-lg:grid-cols-3 k-gap-6">
+            <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                    📱 Mobile-First
+                </h3>
+                <p class="k-text-gray-700">
+                    Diseñado desde cero para dispositivos móviles, garantizando una experiencia óptima en cualquier pantalla.
+                </p>
+            </div>
+
+            <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                    🎨 Utility-First
+                </h3>
+                <p class="k-text-gray-700">
+                    Clases utilitarias componibles y predecibles que te permiten construir cualquier diseño sin escribir CSS personalizado.
+                </p>
+            </div>
+
+            <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                    ⚡ Optimizado
+                </h3>
+                <p class="k-text-gray-700">
+                    CSS minificado y optimizado para producción. Compilador propio rápido y eficiente.
+                </p>
+            </div>
+
+            <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                    🔧 Modular
+                </h3>
+                <p class="k-text-gray-700">
+                    Arquitectura modular que permite usar solo lo que necesitas. Fácil de personalizar y extender.
+                </p>
+            </div>
+
+            <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                    🎯 Prefijo Único
+                </h3>
+                <p class="k-text-gray-700">
+                    Todas las clases usan el prefijo k- para evitar conflictos con otros frameworks CSS.
+                </p>
+            </div>
+
+            <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
+                <h3 class="k-text-xl k-font-semibold k-mb-2 k-text-primary">
+                    📦 Zero Dependencies
+                </h3>
+                <p class="k-text-gray-700">
+                    Sin dependencias externas. Compilador escrito en Python puro, fácil de integrar en cualquier proyecto.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Example Section -->
+    <section class="k-bg-white k-py-12">
+        <div class="k-container">
+            <h2 class="k-text-2xl k-font-bold k-text-center k-mb-8">
+                Ejemplo de Uso
+            </h2>
+            
+            <div class="k-bg-gray-100 k-p-6 k-rounded-lg">
+                <pre><code>&lt;div class="k-container k-mx-auto k-p-4"&gt;
+  &lt;h1 class="k-text-3xl k-font-bold k-text-primary k-mb-4"&gt;
+    ¡Hola, KardoCSS!
+  &lt;/h1&gt;
+  &lt;p class="k-text-lg k-text-gray-700"&gt;
+    Framework CSS mobile-first y utility-first.
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="k-bg-primary k-text-white k-py-8">
+        <div class="k-container k-text-center">
+            <p class="k-mb-2">
+                &copy; 2025 KardoCSS. Licencia MIT.
+            </p>
+            <p class="k-text-sm">
+                Creado por Juan Quezada
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
+
