@@ -1,189 +1,352 @@
-# Kardo
+# KardoCore
 
-**Ecosistema de Desarrollo Web Moderno con Python y CSS**
+**Modern Python Framework for CMS, Headless CMS, APIs and Enterprise Applications**
 
----
-
-## 📦 Monorepo
-
-Este repositorio contiene el ecosistema completo de Kardo en fase inicial de desarrollo:
-
-### 🐍 [KardoCore](./KardoCore)
-
-Framework Python híbrido, modular e IA-ready para Headless CMS, CMS completos, APIs y aplicaciones empresariales.
-
-**Características:**
-- Arquitectura ASGI asíncrona
-- Sistema de validación propio (sin Pydantic)
-- Motor de plantillas KardoTheme
-- Integración IA nativa
-- Modularidad extrema
-- Python 3.14+
-
-**[Ver documentación →](./KardoCore/README.md)**
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-0.0.9-orange.svg)](https://github.com/webcien/Kardo/releases/tag/v0.0.9)
 
 ---
 
-### 🎨 [KardoCSS](./KardoCSS)
+## 🌟 Overview
 
-Framework CSS 100% mobile-first, modular y optimizado. Utility-first con prefijo `k-`.
+**KardoCore** is a hybrid, modular, and AI-ready Python framework designed for building modern web applications, CMS platforms, headless CMS, REST APIs, and enterprise solutions.
 
-**Características:**
-- 100% Mobile-First
-- Utility-First
-- Compilador propio
-- Prefijo único `k-`
-- Sin dependencias
-- Responsive
+### Key Features
 
-**[Ver documentación →](./KardoCSS/README.md)**
+- ⚡ **Asynchronous ASGI Architecture** - Built for high performance
+- 🎨 **Native Template Engine (KardoTheme)** - Natural syntax with `#` prefix
+- 📦 **Package Manager** - Install and manage themes easily
+- 🔒 **Built-in Validation System** - No external dependencies
+- 🤖 **AI-Ready** - Native integration for AI features
+- 🧩 **Extreme Modularity** - Use only what you need
+- 🌍 **Multi-language Support** - i18n ready
 
 ---
 
-## 🚀 Inicio Rápido
+## 📋 Version Information
 
-### Clonar el Repositorio
+KardoCore is available in **two versions** to support different Python environments:
+
+### 🎯 v0.0.9 (Stable) - **RECOMMENDED FOR PRODUCTION**
+- **Python**: >= 3.11
+- **Status**: Stable and production-ready
+- **Branch**: `v0.0.9`
+- **Compatible with**: Python 3.11, 3.12, 3.13, 3.14+
+
+### 🚀 v0.1.0-alpha (Development)
+- **Python**: >= 3.14
+- **Status**: Active development
+- **Branch**: `main`
+- **Features**: Uses Python 3.14 modern features (PEP 649/749)
+
+**📖 [See detailed version comparison →](VERSION_INFO.md)**
+
+---
+
+## 🚀 Quick Start
+
+### Installation
+
+**For production (Python 3.11+):**
+```bash
+pip install git+https://github.com/webcien/Kardo.git@v0.0.9
+```
+
+**For development (Python 3.14+):**
+```bash
+pip install git+https://github.com/webcien/Kardo.git@main
+```
+
+### Hello World
+
+```python
+from kardocore import KardoApp
+
+app = KardoApp()
+
+@app.route("/")
+async def index(request):
+    return {"message": "Hello from KardoCore!"}
+
+if __name__ == "__main__":
+    app.run()
+```
+
+Run your app:
+```bash
+python app.py
+```
+
+Visit: http://localhost:8000
+
+---
+
+## 🎨 Template Engine (KardoTheme)
+
+KardoCore includes a powerful native template engine with natural syntax.
+
+### Template Example
+
+**templates/index.html:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{title}</title>
+</head>
+<body>
+    <h1>{title}</h1>
+    
+    #if items
+        <ul>
+        #for item in items
+            <li>{item.name} - ${item.price}</li>
+        #end
+        </ul>
+    #else
+        <p>No items available</p>
+    #end
+    
+    #include "partials/footer.html"
+</body>
+</html>
+```
+
+### Using Templates
+
+```python
+from kardocore.theme import KardoTheme
+
+theme = KardoTheme(template_dir="templates")
+
+context = {
+    "title": "My Store",
+    "items": [
+        {"name": "Product 1", "price": 29.99},
+        {"name": "Product 2", "price": 39.99}
+    ]
+}
+
+html = theme.render("index.html", context)
+print(html)
+```
+
+### Template Syntax
+
+| Syntax | Description | Example |
+|--------|-------------|---------|
+| `{variable}` | Variable interpolation | `{user.name}` |
+| `#if condition` | Conditional | `#if user.is_admin` |
+| `#else` | Else clause | `#else` |
+| `#end` | End block | `#end` |
+| `#for item in items` | Loop | `#for post in posts` |
+| `#include "file"` | Include template | `#include "header.html"` |
+| `{# comment #}` | Comment | `{# TODO: fix this #}` |
+
+---
+
+## 📦 Package Manager
+
+Install and manage themes from the official registry.
+
+### CLI Commands
 
 ```bash
+# Install a theme
+kardo theme install wellness-clinic
+
+# List installed themes
+kardo theme list
+
+# Search themes
+kardo theme search health
+
+# View theme info
+kardo theme info wellness-clinic
+
+# Uninstall theme
+kardo theme uninstall wellness-clinic
+```
+
+### Programmatic Usage
+
+```python
+from kardocore.packages import PackageManager
+
+pm = PackageManager()
+
+# Install theme
+pm.install_theme("wellness-clinic")
+
+# List themes
+themes = pm.list_themes()
+
+# Search themes
+results = pm.search_themes(query="health", category="salud-bienestar")
+```
+
+---
+
+## 🏗️ Project Structure
+
+```
+my_project/
+├── app.py              # Main application
+├── templates/          # KardoTheme templates
+│   ├── layout.html
+│   ├── index.html
+│   └── partials/
+│       ├── header.html
+│       └── footer.html
+├── static/             # Static files
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── models/             # Data models
+├── routes/             # Route handlers
+└── requirements.txt
+```
+
+---
+
+## 📚 Documentation
+
+- **[Installation Guide](HOW-TO-INSTALL.md)** - Detailed installation instructions
+- **[Quick Start Guide](QUICK-START.md)** - Get started in 5 minutes
+- **[Version Info](VERSION_INFO.md)** - Compare v0.0.9 and v0.1.0
+- **[Changelog](CHANGELOG.md)** - Version history
+- **[Contributing](CONTRIBUTING.md)** - How to contribute
+
+### Language-Specific Documentation
+
+- 🇺🇸 **English**: README.md (this file)
+- 🇪🇸 **Español**: [README.es.md](README.es.md)
+
+---
+
+## 🌐 Ecosystem
+
+KardoCore is part of the **Kardo Ecosystem**:
+
+### [KardoCSS](https://github.com/webcien/KardoCSS)
+Mobile-first CSS framework with utilities and components
+- 67KB full / 50KB minified
+- 20+ components
+- 100+ utilities
+- Touch-optimized
+
+### [KardoTemplates](https://github.com/webcien/KardoTemplates)
+Professional template collection for KardoCore
+- 60 templates (50 frontend + 10 backend)
+- 15 frontend categories
+- 2 backend categories
+- Mobile-first responsive
+
+---
+
+## 🎯 Use Cases
+
+- ✅ **CMS Platforms** - Full-featured content management systems
+- ✅ **Headless CMS** - API-first content platforms
+- ✅ **REST APIs** - Fast and scalable APIs
+- ✅ **Web Applications** - Modern web apps
+- ✅ **Enterprise Solutions** - Business applications
+- ✅ **E-commerce** - Online stores
+- ✅ **Blogs & Portfolios** - Personal websites
+
+---
+
+## 🔧 Requirements
+
+### For v0.0.9 (Stable)
+- Python >= 3.11
+- uvicorn >= 0.30.0
+
+### For v0.1.0-alpha (Development)
+- Python >= 3.14
+- uvicorn >= 0.30.0
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Development Setup
+
+```bash
+# Clone repository
 git clone https://github.com/webcien/Kardo.git
 cd Kardo
-```
 
-### Instalar KardoCore
+# For stable version
+git checkout v0.0.9
 
-```bash
-cd KardoCore
-python3.14 -m venv venv
-source venv/bin/activate
+# For development version
+git checkout main
+
+# Install in development mode
 pip install -e .
-```
 
-### Instalar KardoCSS
-
-```bash
-cd ../KardoCSS
-pip install -e .
-```
-
-### Crear un Proyecto
-
-```bash
-# Usar el instalador CLI de KardoCore
-kardo new miproyecto --mode full
-cd miproyecto
-python3.14 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+# Run tests
+pytest
 ```
 
 ---
 
-## 📚 Documentación
+## 📄 License
 
-- **[KardoCore README](./KardoCore/README.md)** - Documentación del framework Python
-- **[KardoCore Quick Start](./KardoCore/QUICK-START.md)** - Guía de inicio rápido
-- **[KardoCore Installation](./KardoCore/HOW-TO-INSTALL.md)** - Guía completa de instalación
-- **[KardoCSS README](./KardoCSS/README.md)** - Documentación del framework CSS
-- **[Project Summary](./PROJECT_SUMMARY.md)** - Resumen completo del proyecto
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 🏗️ Estructura del Proyecto
+## 🙏 Acknowledgments
 
-```
-Kardo/
-├── KardoCore/          # Framework Python
-│   ├── kardocore/      # Código fuente
-│   ├── examples/       # Ejemplos
-│   ├── tests/          # Tests
-│   └── docs/           # Documentación
-│
-├── KardoCSS/           # Framework CSS
-│   ├── kardocss/       # Código fuente
-│   ├── examples/       # Ejemplos
-│   └── dist/           # CSS compilado
-│
-└── PROJECT_SUMMARY.md  # Resumen del proyecto
-```
+- Inspired by modern Python frameworks
+- Built with performance and developer experience in mind
+- Community-driven development
 
 ---
 
-## 🎯 Filosofía
-
-El ecosistema Kardo se basa en:
-
-1. **Modularidad**: Componentes desacoplados y reutilizables
-2. **Simplicidad**: API clara y predecible
-3. **Performance**: Optimizado para velocidad
-4. **Seguridad**: Validación estricta y sandboxing
-5. **Flexibilidad**: Múltiples modos de operación
-6. **IA-Ready**: Integración nativa de IA generativa
-
----
-
-## 🛣️ Roadmap
-
-### Fase Actual: Alpha (v0.1.0)
-
-- [x] Core de KardoCore
-- [x] Motor de plantillas KardoTheme
-- [x] Sistema de validación propio
-- [x] KardoCSS compilador base
-- [x] CLI instalador
-- [ ] Módulo KardoAI
-- [ ] Panel KardoAdmin
-- [ ] Tests unitarios
-- [ ] Documentación completa
-
-### Próximas Fases
-
-- [ ] Beta (v0.2.0): Sistema de plugins
-- [ ] RC (v0.9.0): Optimizaciones y estabilidad
-- [ ] v1.0.0: Lanzamiento público
-
----
-
-## 🤝 Contribuir
-
-Este proyecto está en desarrollo activo. Las contribuciones serán bienvenidas una vez que se lance la versión alpha pública.
-
-Ver guías de contribución:
-- [KardoCore CONTRIBUTING.md](./KardoCore/CONTRIBUTING.md)
-- [KardoCSS CONTRIBUTING.md](./KardoCSS/CONTRIBUTING.md)
-
----
-
-## 📄 Licencia
-
-Ambos proyectos están bajo **MIT License**.
-
-- [KardoCore LICENSE](./KardoCore/LICENSE)
-- [KardoCSS LICENSE](./KardoCSS/LICENSE)
-
----
-
-## 👤 Autor
-
-**Juan Quezada**
-
----
-
-## 🌟 Estado del Proyecto
-
-**Versión**: 0.1.0-alpha  
-**Estado**: En desarrollo activo  
-**Python**: 3.14+  
-**Licencia**: MIT
-
----
-
-## 📞 Soporte
+## 📞 Support
 
 - **Issues**: [GitHub Issues](https://github.com/webcien/Kardo/issues)
-- **Documentación**: Ver carpetas de cada proyecto
+- **Discussions**: [GitHub Discussions](https://github.com/webcien/Kardo/discussions)
+- **Documentation**: [Full Documentation](https://github.com/webcien/Kardo/wiki)
 
 ---
 
-**Nota**: Este proyecto está en fase alpha. No se recomienda su uso en producción todavía.
+## 🗺️ Roadmap
+
+### v0.0.9 (Current - Stable)
+- ✅ Python 3.11+ compatibility
+- ✅ Core features complete
+- 🔄 Bug fixes and improvements
+- 🔄 Documentation
+
+### v0.1.0-alpha (Current - Development)
+- ✅ Python 3.14+ optimizations
+- 🔄 Experimental features
+- 📅 Integrated caching system
+- 📅 Multi-database support
+- 📅 Automatic REST API
+- 📅 GraphQL support
+
+### v1.0.0 (Future)
+- 📅 Stable unified version
+- 📅 Python 3.14+ as minimum requirement
+- 📅 Complete documentation
+- 📅 Comprehensive testing
+- 📅 Production-ready
+
+---
+
+## ⭐ Star History
+
+If you find KardoCore useful, please consider giving it a star on GitHub!
+
+---
+
+**Made with ❤️ by the Kardo Team**
 
