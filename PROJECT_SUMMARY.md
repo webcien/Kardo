@@ -1,441 +1,326 @@
-# Proyecto Kardo - Resumen de Desarrollo
+# KardoCore Project Summary
 
-**Fecha de creación**: Octubre 2025  
-**Versión**: 0.1.0-alpha  
-**Autor**: Juan Quezada  
-**Licencia**: MIT
-
-## Descripción General
-
-El Proyecto Kardo es un ecosistema de desarrollo web moderno que consta de dos frameworks independientes pero diseñados para trabajar juntos:
-
-1. **KardoCore**: Framework Python híbrido, modular e IA-ready
-2. **KardoCSS**: Framework CSS 100% mobile-first y utility-first
-
-Ambos proyectos están desarrollados desde cero, sin dependencias externas pesadas, bajo licencia MIT y listos para ser publicados en GitHub como proyectos open source independientes.
+**Last Updated**: October 24, 2025  
+**Version**: 0.0.9 (Stable) / 0.1.0-alpha (Development)  
+**Status**: Active Development
 
 ---
 
-## KardoCore
+## 📊 Project Overview
 
-### Descripción
+KardoCore is a modern Python framework for building CMS platforms, headless CMS, REST APIs, and enterprise applications. The project consists of three main repositories:
 
-Framework Python basado en ASGI para la creación de Headless CMS, CMS completos, APIs, eCommerce y aplicaciones empresariales con integración nativa de IA generativa.
-
-### Características Implementadas
-
-#### ✅ Núcleo del Framework
-
-- **Servidor ASGI Asíncrono** (`kardocore/core/app.py`)
-  - Manejo de peticiones HTTP
-  - Sistema de rutas tipadas
-  - Respuestas JSON y HTML
-  - Middleware extensible
-
-- **Sistema de Validación Propio** (`kardocore/core/models/`)
-  - Inspirado en Pydantic pero desarrollado desde cero
-  - Validación de tipos automática
-  - Conversión de tipos
-  - Helpers para campos comunes (String, Integer, Email, DateTime)
-  - Serialización a dict/JSON
-
-- **Sistema de Eventos Asíncronos** (`kardocore/core/events.py`)
-  - EventManager con aislamiento de errores
-  - Decorador `@event` para registro fácil
-  - Historial de eventos para auditoría
-  - Eventos predefinidos del sistema
-
-- **Sistema de Configuración** (`kardocore/core/config.py`)
-  - KardoSettings con validación tipada
-  - Soporte para variables de entorno (.env)
-  - Prioridad: ENV > .env > defaults
-  - Configuración por entorno (dev, staging, prod)
-
-#### ✅ Motor de Plantillas KardoTheme
-
-- **Tokenizador** (`kardocore/theme/tokenizer.py`)
-  - Sintaxis expresiva con prefijo `#`
-  - Bloques de control: `#for`, `#if`, `#elif`, `#else`, `#end`
-  - Expresiones dinámicas: `{variable}`
-  - Comentarios: `{# ... #}`
-  - Validación de bloques balanceados
-
-- **Renderizador** (`kardocore/theme/renderer.py`)
-  - Escape automático (anti-XSS)
-  - Sandboxing de seguridad
-  - Contexto seguro para evaluación
-  - Soporte para bucles y condicionales anidados
-
-- **Motor Principal** (`kardocore/theme/engine.py`)
-  - Caché de plantillas compiladas
-  - Renderizado desde archivos o strings
-  - Precompilación de plantillas
-  - Detección automática de cambios
-
-### Tecnologías Utilizadas
-
-- **Python 3.14+** con características modernas:
-  - PEP 649/749: Evaluación diferida de anotaciones
-  - PEP 734: Múltiples intérpretes para aislamiento
-  - PEP 750: Template strings seguros
-  - PEP 768: Interfaz de depuración
-  - PEP 784: Compresión Zstandard
-
-- **ASGI** para servidor asíncrono
-- **Uvicorn** como servidor de desarrollo
-
-### Estructura del Proyecto
-
-```
-KardoCore/
-├── kardocore/
-│   ├── core/           # Núcleo del framework
-│   │   ├── app.py      # Aplicación ASGI
-│   │   ├── models/     # Sistema de validación
-│   │   ├── events.py   # Sistema de eventos
-│   │   └── config.py   # Configuración
-│   ├── theme/          # Motor de plantillas
-│   │   ├── tokenizer.py
-│   │   ├── renderer.py
-│   │   └── engine.py
-│   ├── ai/             # Módulo IA (pendiente)
-│   ├── admin/          # Panel admin (pendiente)
-│   └── cli/            # Herramientas CLI (pendiente)
-├── examples/
-│   ├── simple_app.py
-│   ├── theme_example.py
-│   └── templates/
-├── tests/              # Tests (pendiente)
-├── docs/               # Documentación (pendiente)
-├── README.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── setup.py
-└── .env.example
-```
-
-### Ejemplos de Uso
-
-#### Aplicación Básica
-
-```python
-from kardocore import KardoApp, JSONResponse
-
-app = KardoApp(title="Mi App", version="1.0.0")
-
-@app.get("/")
-async def index(request):
-    return {"message": "¡Hola, KardoCore!"}
-
-@app.on_event("on_startup")
-async def startup():
-    print("Aplicación iniciada")
-```
-
-#### Motor de Plantillas
-
-```python
-from kardocore.theme import KardoTheme
-
-theme = KardoTheme(template_dir="templates")
-html = theme.render("page.html", {
-    "title": "Mi Página",
-    "posts": posts
-})
-```
-
-### Roadmap
-
-- [x] Fase 1: Core y Seguridad
-- [x] Fase 2: KardoTheme (Motor de Plantillas)
-- [ ] Fase 3: KardoAI (Integración IA)
-- [ ] Fase 4: Panel Administrativo
-- [ ] Fase 5: Extensiones y Plugins
-- [ ] Fase 6: Tests y Documentación
-- [ ] Fase 7: Lanzamiento Alpha
+1. **KardoCore** (webcien/Kardo) - Main framework
+2. **KardoCSS** (webcien/KardoCSS) - CSS framework
+3. **KardoTemplates** (webcien/KardoTemplates) - Template collection
 
 ---
 
-## KardoCSS
+## ✅ Completed Tasks
 
-### Descripción
+### 1. Core Framework Development
+- ✅ **ASGI Architecture** - Custom ASGI implementation without external dependencies
+- ✅ **KardoTheme Engine** - Native template engine with `#` syntax
+- ✅ **Model System** - Custom validation without Pydantic
+- ✅ **Event System** - Asynchronous event handling
+- ✅ **Routing System** - Flexible route management
+- ✅ **Request/Response** - HTTP handling
 
-Framework CSS utility-first y mobile-first diseñado originalmente para KardoCore pero completamente independiente y utilizable en cualquier proyecto web.
+### 2. Version Management
+- ✅ **v0.0.9 Branch** - Python 3.11+ compatible version (STABLE)
+- ✅ **v0.1.0-alpha Branch** - Python 3.14+ optimized version (DEVELOPMENT)
+- ✅ **Git Tags** - v0.0.9 tag created and published
+- ✅ **VERSION_INFO.md** - Detailed version comparison documentation
 
-### Características Implementadas
+### 3. Package Manager
+- ✅ **PackageManager Module** - Theme installation and management
+- ✅ **CLI Commands** - `kardo theme install/list/search/info/uninstall`
+- ✅ **Registry System** - Official theme registry (registry.yaml)
+- ✅ **GitHub Integration** - Install from GitHub repositories
+- ✅ **Local Installation** - Install from local directories
 
-#### ✅ Sistema de Configuración
+### 4. KardoCSS Framework
+- ✅ **Base Utilities** - Spacing, colors, typography
+- ✅ **Layout System** - Flexbox, grid, containers
+- ✅ **Components** - 20+ UI components (cards, buttons, forms, etc.)
+- ✅ **Effects** - Shadows, transitions, animations
+- ✅ **Mobile-First** - Touch targets, gestures, safe areas
+- ✅ **Responsive** - Breakpoints (sm, md, lg, xl)
+- ✅ **Compiler** - Python-based CSS compiler
+- ✅ **Minification** - 67KB full / 50KB minified
+- ✅ **Repository** - Published at webcien/KardoCSS
 
-- **KardoCSSConfig** (`kardocss/core/config.py`)
-  - Configuración completa de tokens de diseño
-  - Colores, espaciados, tipografía, breakpoints
-  - Personalización mediante archivos Python
-  - Merge profundo de configuraciones
+### 5. KardoTemplates Collection
+- ✅ **50 Frontend Templates** - 15 categories
+  - Salud y Bienestar (3)
+  - Educación y Cursos (3)
+  - Negocios (4)
+  - Servicios Profesionales (3)
+  - Comercio (4)
+  - Restaurantes (3)
+  - Bienes Raíces (3)
+  - Eventos (3)
+  - Industria (3)
+  - Portafolios (4)
+  - Freelancers (3)
+  - Marca Personal (3)
+  - Sustentabilidad (3)
+  - SaaS (4)
+  - Landing Pages (4)
+- ✅ **10 Backend Templates** - Admin and dashboard themes
+- ✅ **KardoTheme Syntax** - All templates use native `#` syntax
+- ✅ **KardoCSS Integration** - Mobile-first responsive design
+- ✅ **Repository** - Published at webcien/KardoTemplates
+- ✅ **Registry** - registry.yaml with all template metadata
 
-#### ✅ Compilador
+### 6. Documentation
+- ✅ **README.md** - English (primary language)
+- ✅ **README.es.md** - Spanish (secondary language)
+- ✅ **HOW-TO-INSTALL.md** - Complete installation guide
+- ✅ **QUICK-START.md** - Quick start guide
+- ✅ **VERSION_INFO.md** - Version comparison
+- ✅ **CHANGELOG.md** - Version history
+- ✅ **CONTRIBUTING.md** - Contribution guidelines
+- ✅ **Installation Modes** - 4 modes documented (Core, Core+Admin, Full, Theme-only)
+- ✅ **KardoAI Documentation** - AI integration overview
 
-- **KardoCSSCompiler** (`kardocss/compiler/compiler.py`)
-  - Generación de CSS completo
-  - Minificación automática
-  - Purging de CSS no utilizado (pendiente implementación completa)
-  - Optimización de tamaño
+### 7. Repository Management
+- ✅ **GitHub Organization** - webcien
+- ✅ **Repository Structure** - Consolidated to webcien/Kardo
+- ✅ **Branch Strategy** - main (v0.1.0-alpha) and v0.0.9 (stable)
+- ✅ **Git Workflow** - Commits, tags, and releases
+- ✅ **README Updates** - Removed monorepo references
+- ✅ **URL Corrections** - All URLs point to webcien/Kardo
 
-#### ✅ Generadores de Utilidades
+### 8. Syntax Corrections
+- ✅ **Template Syntax** - Converted from Jinja2 `{% %}` to KardoTheme `#`
+- ✅ **All Templates Updated** - 60 templates with correct syntax
+- ✅ **Composition Pattern** - Using `#include` instead of inheritance
+- ✅ **No Blocks** - Removed block-based inheritance
 
-- **Spacing** (`kardocss/utilities/spacing.py`)
-  - Margin y padding en todas las direcciones
-  - Escala de espaciado configurable
-  - Conversión automática px a rem
-
-- **Colors** (`kardocss/utilities/colors.py`)
-  - Background, text y border colors
-  - Escalas de grises
-  - Colores semánticos (primary, secondary, etc.)
-
-- **Typography** (`kardocss/utilities/typography.py`)
-  - Tamaños de fuente
-  - Pesos de fuente
-  - Alineación de texto
-
-- **Layout** (`kardocss/utilities/layout.py`)
-  - Display (block, flex, grid, etc.)
-  - Flexbox utilities
-  - Grid utilities
-
-- **Borders** (`kardocss/utilities/borders.py`)
-  - Border radius
-  - Sombras (shadows)
-
-- **Sizing** (`kardocss/utilities/sizing.py`)
-  - Width y height
-  - Container
-
-#### ✅ CLI
-
-- **Build Tool** (`kardocss/cli/build.py`)
-  - Compilación desde línea de comandos
-  - Soporte para configuración personalizada
-  - Minificación opcional
-  - Output detallado
-
-### Tecnologías Utilizadas
-
-- **Python 3.10+** para el compilador
-- **CSS3** estándar
-- **Sin dependencias externas**
-
-### Estructura del Proyecto
-
-```
-KardoCSS/
-├── kardocss/
-│   ├── core/
-│   │   └── config.py       # Configuración
-│   ├── compiler/
-│   │   └── compiler.py     # Compilador principal
-│   ├── utilities/          # Generadores de utilidades
-│   │   ├── spacing.py
-│   │   ├── colors.py
-│   │   ├── typography.py
-│   │   ├── layout.py
-│   │   ├── borders.py
-│   │   └── sizing.py
-│   └── cli/
-│       └── build.py        # CLI
-├── examples/
-│   └── index.html
-├── dist/
-│   ├── kardocss.css        # CSS compilado (16.94 KB)
-│   └── kardocss.min.css    # CSS minificado (13.37 KB)
-├── README.md
-├── LICENSE
-├── CONTRIBUTING.md
-├── setup.py
-└── test_compile.py
-```
-
-### Ejemplos de Uso
-
-#### HTML con KardoCSS
-
-```html
-<div class="k-container k-mx-auto k-p-4">
-  <h1 class="k-text-3xl k-font-bold k-text-primary k-mb-4">
-    ¡Hola, KardoCSS!
-  </h1>
-  <div class="k-grid k-grid-cols-1 k-md:grid-cols-2 k-gap-4">
-    <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
-      Tarjeta 1
-    </div>
-    <div class="k-bg-white k-p-6 k-rounded-lg k-shadow-md">
-      Tarjeta 2
-    </div>
-  </div>
-</div>
-```
-
-#### Compilación
-
-```bash
-# Compilar CSS
-python -m kardocss.cli.build -o dist/kardocss.css
-
-# Compilar y minificar
-python -m kardocss.cli.build -o dist/kardocss.min.css --minify
-```
-
-### Roadmap
-
-- [x] Sistema de configuración
-- [x] Compilador base
-- [x] Utilidades fundamentales
-- [x] CLI básico
-- [ ] Variantes responsive completas
-- [ ] Purging de CSS no utilizado
-- [ ] Componentes opcionales
-- [ ] Publicación en NPM/PyPI
-- [ ] Documentación completa
+### 9. Python Compatibility
+- ✅ **Python 3.11+ Support** - v0.0.9 branch
+- ✅ **Python 3.14+ Support** - main branch
+- ✅ **Type Hints Fixed** - Union types → Optional for 3.11
+- ✅ **Annotationlib Fallback** - Compatibility layer for 3.11-3.13
+- ✅ **Import Fixes** - All imports compatible with 3.11+
 
 ---
 
-## Integración KardoCore + KardoCSS
+## 🔄 In Progress Tasks
 
-### Uso Conjunto
+### 1. KardoAdmin Module
+- 🔄 **Admin Panel UI** - Dashboard interface
+- 🔄 **Model Registration** - Auto-admin for models
+- 🔄 **CRUD Operations** - Create, read, update, delete
+- 🔄 **User Management** - Authentication and authorization
+- 🔄 **Permissions System** - Role-based access control
+- 🔄 **Search & Filters** - Admin search functionality
 
-```html
-<!-- Plantilla KardoTheme con clases KardoCSS -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>{page.title}</title>
-    <link rel="stylesheet" href="/static/css/kardocss.min.css">
-</head>
-<body class="k-bg-gray-100">
-    <div class="k-container k-mx-auto k-p-4">
-        <h1 class="k-text-4xl k-font-bold k-text-primary">
-            {page.title}
-        </h1>
-        
-        #for post in posts
-            <article class="k-bg-white k-p-6 k-rounded-lg k-shadow-md k-mb-4">
-                <h2 class="k-text-2xl k-font-semibold">{post.title}</h2>
-                <p class="k-text-gray-700">{post.excerpt}</p>
-            </article>
-        #end
-    </div>
-</body>
-</html>
-```
+### 2. KardoAI Integration
+- 🔄 **AI Provider Interface** - OpenAI, Anthropic, Google AI
+- 🔄 **Content Generation** - AI-powered content creation
+- 🔄 **Semantic Search** - Embeddings and vector search
+- 🔄 **Chatbot Integration** - Conversational AI
+- 🔄 **Image Generation** - AI image creation
+- 🔄 **Translation** - Multi-language AI translation
 
----
+### 3. CLI Enhancement
+- 🔄 **Project Initialization** - `kardo init` command
+- 🔄 **Development Server** - `kardo serve` command
+- 🔄 **Database Migrations** - `kardo migrate` command
+- 🔄 **User Management** - `kardo user create/list/delete`
+- 🔄 **Build Commands** - `kardo build` for production
 
-## Estado Actual del Desarrollo
-
-### ✅ Completado
-
-1. **KardoCore**
-   - ✅ Servidor ASGI básico
-   - ✅ Sistema de validación propio
-   - ✅ Sistema de eventos
-   - ✅ Configuración con .env
-   - ✅ Motor de plantillas KardoTheme completo
-   - ✅ Ejemplos funcionales
-   - ✅ Documentación README
-   - ✅ Licencia MIT
-   - ✅ CONTRIBUTING.md
-
-2. **KardoCSS**
-   - ✅ Sistema de configuración
-   - ✅ Compilador funcional
-   - ✅ Generadores de utilidades
-   - ✅ CLI básico
-   - ✅ Minificación
-   - ✅ Ejemplos HTML
-   - ✅ Documentación README
-   - ✅ Licencia MIT
-   - ✅ CONTRIBUTING.md
-
-### 🚧 Pendiente
-
-1. **KardoCore**
-   - ⏳ Módulo KardoAI (integración IA)
-   - ⏳ Panel KardoAdmin
-   - ⏳ Sistema de autenticación completo
-   - ⏳ API REST/GraphQL
-   - ⏳ Sistema de plugins
-   - ⏳ Tests unitarios
-   - ⏳ Documentación completa
-
-2. **KardoCSS**
-   - ⏳ Variantes responsive completas
-   - ⏳ Purging avanzado
-   - ⏳ Componentes opcionales
-   - ⏳ Tests
-   - ⏳ Documentación de utilidades
+### 4. Testing & Quality
+- 🔄 **Unit Tests** - Core module tests
+- 🔄 **Integration Tests** - Full workflow tests
+- 🔄 **Template Tests** - Template rendering tests
+- 🔄 **CI/CD Pipeline** - GitHub Actions
+- 🔄 **Code Coverage** - Target: 80%+
 
 ---
 
-## Próximos Pasos
+## 📅 Pending Tasks
 
-### Corto Plazo (1-2 semanas)
+### 1. PyPI Publication
+- ⏳ **Package Setup** - setup.py configuration
+- ⏳ **PyPI Account** - Register package name
+- ⏳ **Version 0.0.9** - Publish stable version
+- ⏳ **Version 0.1.0** - Publish development version
+- ⏳ **Automated Publishing** - GitHub Actions workflow
 
-1. Completar tests unitarios básicos
-2. Implementar módulo KardoAI básico
-3. Crear documentación de API
-4. Preparar para publicación en GitHub
+### 2. npm Packages
+- ⏳ **@kardo/css** - Publish KardoCSS to npm
+- ⏳ **@kardo/theme-compiler** - Template compiler for npm
+- ⏳ **@kardo/cli** - CLI tools for npm
+- ⏳ **CDN Setup** - jsdelivr or unpkg integration
 
-### Mediano Plazo (1-2 meses)
+### 3. Database Support
+- ⏳ **SQLite** - Default database
+- ⏳ **PostgreSQL** - Production database
+- ⏳ **MySQL** - Alternative database
+- ⏳ **MongoDB** - NoSQL support
+- ⏳ **ORM Layer** - Database abstraction
 
-1. Desarrollar panel KardoAdmin
-2. Implementar sistema de plugins
-3. Completar variantes responsive de KardoCSS
-4. Crear sitio de documentación
+### 4. Authentication & Security
+- ⏳ **User Model** - Built-in user system
+- ⏳ **Password Hashing** - Secure password storage
+- ⏳ **Session Management** - User sessions
+- ⏳ **JWT Support** - Token-based auth
+- ⏳ **OAuth Integration** - Social login
+- ⏳ **CSRF Protection** - Security middleware
+- ⏳ **XSS Prevention** - Auto-escaping
 
-### Largo Plazo (3-6 meses)
+### 5. API Features
+- ⏳ **REST API Generator** - Auto-generate APIs from models
+- ⏳ **GraphQL Support** - GraphQL endpoint
+- ⏳ **API Documentation** - OpenAPI/Swagger
+- ⏳ **Rate Limiting** - API throttling
+- ⏳ **CORS Support** - Cross-origin requests
 
-1. Lanzamiento alpha público
-2. Comunidad y contribuciones
-3. Publicación en PyPI (KardoCore) y NPM (KardoCSS)
-4. Versión 1.0 estable
+### 6. Performance
+- ⏳ **Caching System** - Redis integration
+- ⏳ **Query Optimization** - Database query caching
+- ⏳ **Template Caching** - Compiled template cache
+- ⏳ **Static File Serving** - Optimized static files
+- ⏳ **Compression** - Gzip/Brotli support
+
+### 7. Deployment
+- ⏳ **Docker Support** - Dockerfile and docker-compose
+- ⏳ **Kubernetes** - K8s deployment configs
+- ⏳ **Heroku** - One-click deploy
+- ⏳ **Vercel** - Serverless deployment
+- ⏳ **AWS** - EC2/ECS deployment guide
+
+### 8. Documentation
+- ⏳ **Full Documentation Site** - MkDocs or Sphinx
+- ⏳ **API Reference** - Complete API docs
+- ⏳ **Tutorial Series** - Step-by-step guides
+- ⏳ **Video Tutorials** - YouTube channel
+- ⏳ **Examples Repository** - Real-world examples
+
+### 9. Community
+- ⏳ **Discord Server** - Community chat
+- ⏳ **GitHub Discussions** - Q&A forum
+- ⏳ **Contributing Guide** - Enhanced guidelines
+- ⏳ **Code of Conduct** - Community standards
+- ⏳ **Issue Templates** - Bug reports and feature requests
+
+### 10. Extensions & Plugins
+- ⏳ **Plugin System** - Extension architecture
+- ⏳ **Middleware System** - Request/response middleware
+- ⏳ **Hooks System** - Event hooks
+- ⏳ **Plugin Registry** - Official plugin directory
 
 ---
 
-## Notas Técnicas
+## 🎯 Milestones
 
-### Decisiones de Diseño
+### Milestone 1: v0.0.9 Stable Release ✅
+- ✅ Python 3.11+ compatibility
+- ✅ Core features complete
+- ✅ Documentation complete
+- ✅ 60 templates available
+- ✅ KardoCSS framework ready
 
-1. **Sin Pydantic**: Se desarrolló un micro-sistema de validación propio para mantener control total y evitar dependencias pesadas.
+### Milestone 2: v0.1.0-alpha Release ✅
+- ✅ Python 3.14+ optimizations
+- ✅ Modern Python features
+- ✅ Same features as v0.0.9
+- ✅ Performance improvements
 
-2. **Prefijo k-**: KardoCSS usa el prefijo `k-` en todas las clases para evitar conflictos con otros frameworks.
+### Milestone 3: v0.2.0 (Next) 🔄
+- 🔄 KardoAdmin complete
+- 🔄 Database support
+- 🔄 Authentication system
+- ⏳ PyPI publication
+- ⏳ npm packages
 
-3. **Mobile-First**: Ambos frameworks priorizan dispositivos móviles en su diseño.
+### Milestone 4: v0.5.0 (Future) ⏳
+- ⏳ KardoAI integration
+- ⏳ REST API generator
+- ⏳ GraphQL support
+- ⏳ Full documentation site
+- ⏳ Docker support
 
-4. **Modularidad**: Arquitectura completamente modular y desacoplada.
-
-5. **Seguridad**: Escape automático, sandboxing y validación estricta en todos los niveles.
-
-### Compatibilidad
-
-- **Python**: 3.14+ (KardoCore), 3.10+ (KardoCSS)
-- **Navegadores**: Todos los navegadores modernos
-- **Servidores ASGI**: Uvicorn, Hypercorn, Daphne
+### Milestone 5: v1.0.0 (Stable) ⏳
+- ⏳ Production-ready
+- ⏳ Complete test coverage
+- ⏳ Security audit
+- ⏳ Performance benchmarks
+- ⏳ Enterprise support
 
 ---
 
-## Licencia
+## 📈 Statistics
 
-Ambos proyectos están licenciados bajo **MIT License**, permitiendo uso comercial y modificación libre.
+### Code Metrics
+- **Total Lines of Code**: ~15,000
+- **Python Files**: 50+
+- **Templates**: 60
+- **CSS Lines**: 3,778
+- **Documentation Pages**: 10+
+
+### Repository Stats
+- **Commits**: 150+
+- **Branches**: 2 (main, v0.0.9)
+- **Tags**: 1 (v0.0.9)
+- **Contributors**: 1
+- **Stars**: TBD
+- **Forks**: TBD
+
+### Package Stats
+- **KardoCore Size**: ~500KB
+- **KardoCSS Size**: 67KB (full) / 50KB (min)
+- **KardoTemplates Size**: 6.8MB
+- **Total Ecosystem**: ~7.5MB
 
 ---
 
-## Contacto y Contribuciones
+## 🔗 Repository Links
 
-- **Autor**: Juan Quezada
-- **GitHub**: (pendiente de publicación)
-- **Contribuciones**: Ver CONTRIBUTING.md en cada proyecto
+- **KardoCore**: https://github.com/webcien/Kardo
+  - Branch main: https://github.com/webcien/Kardo/tree/main
+  - Branch v0.0.9: https://github.com/webcien/Kardo/tree/v0.0.9
+- **KardoCSS**: https://github.com/webcien/KardoCSS
+- **KardoTemplates**: https://github.com/webcien/KardoTemplates
 
 ---
 
-**Última actualización**: Octubre 2025  
-**Versión del documento**: 1.0
+## 📝 Notes
+
+### Recent Changes
+- Consolidated repository structure (removed /KardoCore confusion)
+- Added 4 installation modes documentation
+- Integrated KardoAI documentation
+- Updated all READMEs with English as primary language
+- Fixed all template syntax to use KardoTheme native syntax
+- Created Python 3.11+ compatible version (v0.0.9)
+
+### Known Issues
+- PyPI publication pending
+- npm packages not yet published
+- KardoAdmin module incomplete
+- KardoAI implementation pending
+- Database layer not implemented
+- Authentication system not implemented
+
+### Next Steps
+1. Complete KardoAdmin module
+2. Implement database support
+3. Add authentication system
+4. Publish to PyPI
+5. Create npm packages
+6. Set up CI/CD pipeline
+7. Write comprehensive tests
+8. Create full documentation site
+
+---
+
+**Legend:**
+- ✅ Completed
+- 🔄 In Progress
+- ⏳ Pending
+- ❌ Blocked/Cancelled
 
