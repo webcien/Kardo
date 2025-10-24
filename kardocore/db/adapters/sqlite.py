@@ -1,7 +1,7 @@
 """SQLite adapter for KardoCore"""
 import aiosqlite
 from typing import Optional, List, Dict, Any
-from ..protocols import DatabaseProtocol, QueryResult, Table, Column
+from kardocore.db.protocols import DatabaseProtocol, QueryResult, Table, Column
 
 class SQLiteAdapter:
     def __init__(self, database: str = ":memory:"):
