@@ -1,0 +1,17 @@
+include README.md
+include README.es.md
+include LICENSE
+include CHANGELOG.md
+include pyproject.toml
+include setup.py
+
+recursive-include kardocore *.py
+recursive-include kardocore/theme/templates *.html
+recursive-include docs *.md
+
+exclude .gitignore
+exclude .github/*
+exclude tests/*
+exclude examples/*
+exclude *.pyc
+exclude __pycache__
