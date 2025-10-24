@@ -1,0 +1,13 @@
+# KardoCore Blog CMS Example Requirements
+
+# Core (local development - use path to parent directory)
+# In production, use: kardocore>=0.2.0
+
+# Optional password hashing (recommended)
+bcrypt>=4.0.0
+
+# Optional for PostgreSQL
+# asyncpg>=0.28.0
+
+# Optional for better password hashing
+# argon2-cffi>=21.3.0
