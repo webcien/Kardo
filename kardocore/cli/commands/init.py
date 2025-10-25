@@ -48,7 +48,7 @@ async def main():
     await db.connect_all()
     
     print("✅ KardoCore initialized!")
-    print(f"✅ Database connected: {db.get().is_connected()}")
+    print("✅ Database connected successfully!")
 
 if __name__ == "__main__":
     import asyncio
