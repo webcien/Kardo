@@ -46,7 +46,20 @@ from .session import Session, SessionManager
 from .middleware.csrf import CSRFProtection
 from .middleware.ratelimit import RateLimiter
 
+from .oauth import OAuth, OAuthProvider
+from .twofa import TwoFactorAuth
+from .email import EmailVerification
+from .reset import PasswordReset
+from .xss import XSSProtection
+
 __all__ = [
+    "OAuth",
+    "OAuthProvider",
+    "TwoFactorAuth",
+    "EmailVerification",
+    "PasswordReset",
+    "XSSProtection",
+
     "Auth",
     "User",
     "UserRole",

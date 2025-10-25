@@ -24,6 +24,11 @@ from .connection import DatabaseManager
 from .query.builder import QueryBuilder
 
 __all__ = [
+    "MySQLAdapter",
+    "Model",
+    "QuerySet",
+    "Field",
+
     "Database",
     "DatabaseManager",
     "DatabaseProtocol",
