@@ -2,7 +2,7 @@
 Database Module - Core database functionality
 """
 
-from kardocore.db.connection import ConnectionManager
+from kardocore.db.connection import DatabaseManager
 from kardocore.db.protocols import DatabaseProtocol, ColumnType, Column, Table
 from kardocore.db.adapters.sqlite import SQLiteAdapter
 from kardocore.db.adapters.postgresql import PostgreSQLAdapter
@@ -12,10 +12,12 @@ from kardocore.db.orm import Model, QuerySet
 from kardocore.db.migrations.manager import MigrationManager
 
 # Alias for convenience
-Database = ConnectionManager
+Database = DatabaseManager
+ConnectionManager = DatabaseManager  # Backward compatibility
 
 __all__ = [
     "Database",
+    "DatabaseManager",
     "ConnectionManager",
     "DatabaseProtocol",
     "ColumnType",
