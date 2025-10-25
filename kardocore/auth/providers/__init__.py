@@ -1,8 +1,8 @@
 """
 OAuth Providers
+
+Note: Provider implementations are optional and can be added as needed.
 """
 
-from kardocore.auth.providers.google import GoogleOAuthProvider
-from kardocore.auth.providers.github import GitHubOAuthProvider
+__all__ = []
 
-__all__ = ["GoogleOAuthProvider", "GitHubOAuthProvider"]

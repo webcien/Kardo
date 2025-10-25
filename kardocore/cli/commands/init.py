@@ -9,12 +9,22 @@ from kardocore.cli.commands.base import BaseCommand
 class InitCommand(BaseCommand):
     """Initialize a new KardoCore project"""
     
-    def __init__(self):
-        super().__init__("init", "Initialize a new KardoCore project")
+    name = "init"
+    description = "Initialize a new KardoCore project"
     
-    def execute(self, args: list[str]) -> int:
+    def _add_arguments(self, parser):
+        """Add command arguments"""
+        parser.add_argument(
+            "project_name",
+            nargs="?",
+            default="my-kardo-project",
+            help="Name of the project to create"
+        )
+    
+    async def execute(self, args: list[str]) -> int:
         """Execute init command"""
-        project_name = args[0] if args else "my-kardo-project"
+        parsed = self.parse_args(args)
+        project_name = parsed.project_name
         
         print(f"🚀 Initializing KardoCore project: {project_name}")
         
@@ -29,15 +39,17 @@ class InitCommand(BaseCommand):
         # Create main.py
         (project_path / "main.py").write_text("""
 from kardocore.db import Database
-from kardocore.auth import KardoAuth
+from kardocore.db.adapters import SQLiteAdapter
+from kardocore.auth import AuthManager, UserRepository
 
 async def main():
     # Initialize database
-    db = Database("sqlite", "app.db")
+    db = Database(SQLiteAdapter("app.db"))
     await db.connect()
     
     # Initialize auth
-    auth = KardoAuth(db)
+    user_repo = UserRepository(db)
+    auth = AuthManager(user_repo, secret_key="change-this-secret-key")
     
     print("✅ KardoCore initialized!")
 

@@ -2,4 +2,7 @@
 Admin Module - Administrative interface
 """
 
-__all__ = []
+from kardocore.admin.app import KardoAdmin
+
+__all__ = ["KardoAdmin"]
+

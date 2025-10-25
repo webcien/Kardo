@@ -8,10 +8,29 @@ from kardocore.cli.commands.base import BaseCommand
 class ServeCommand(BaseCommand):
     """Start development server"""
     
-    def __init__(self):
-        super().__init__("serve", "Start development server")
+    name = "serve"
+    description = "Start development server"
     
-    def execute(self, args: list[str]) -> int:
+    def _add_arguments(self, parser):
+        """Add command arguments"""
+        parser.add_argument(
+            "--host",
+            default="127.0.0.1",
+            help="Host to bind to"
+        )
+        parser.add_argument(
+            "--port",
+            type=int,
+            default=8000,
+            help="Port to bind to"
+        )
+        parser.add_argument(
+            "--reload",
+            action="store_true",
+            help="Enable auto-reload"
+        )
+    
+    async def execute(self, args: list[str]) -> int:
         """Execute serve command"""
         host = "127.0.0.1"
         port = 8000

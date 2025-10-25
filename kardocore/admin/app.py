@@ -9,7 +9,7 @@ from pathlib import Path
 import asyncio
 
 from ..auth.manager import AuthManager
-from ..db.connection import DatabaseConnection
+from ..db.connection import DatabaseManager
 from .routes.dashboard import DashboardRoutes
 from .routes.users import UserRoutes
 from .routes.content import ContentRoutes
@@ -32,7 +32,7 @@ class KardoAdmin:
     
     def __init__(
         self,
-        db: DatabaseConnection,
+        db: DatabaseManager,
         auth: AuthManager,
         config: Optional[Dict[str, Any]] = None
     ):

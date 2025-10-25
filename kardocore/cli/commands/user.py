@@ -7,7 +7,7 @@ from pathlib import Path
 from kardocore.cli.commands.base import BaseCommand
 from kardocore.db import Database
 from kardocore.db.adapters import SQLiteAdapter
-from kardocore.auth import Auth, UserRole
+from kardocore.auth import AuthManager, UserRole
 
 
 class UserCommand(BaseCommand):
@@ -53,7 +53,9 @@ class UserCommand(BaseCommand):
         await db.connect()
         
         # TODO: Get secret from config
-        auth = Auth(db, secret="change-this-secret-key")
+        from kardocore.auth import UserRepository
+        user_repo = UserRepository(db)
+        auth = AuthManager(user_repo, secret_key="change-this-secret-key")
         
         return db, auth
     

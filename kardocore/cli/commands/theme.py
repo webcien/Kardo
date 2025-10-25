@@ -8,10 +8,25 @@ from kardocore.cli.commands.base import BaseCommand
 class ThemeCommand(BaseCommand):
     """Manage themes"""
     
-    def __init__(self):
-        super().__init__("theme", "Manage themes")
+    name = "theme"
+    description = "Manage themes"
     
-    def execute(self, args: list[str]) -> int:
+    def _add_arguments(self, parser):
+        """Add command arguments"""
+        subparsers = parser.add_subparsers(dest="subcommand", help="Theme subcommands")
+        
+        # Install
+        install_parser = subparsers.add_parser("install", help="Install a theme")
+        install_parser.add_argument("name", help="Theme name")
+        
+        # List
+        subparsers.add_parser("list", help="List installed themes")
+        
+        # Search
+        search_parser = subparsers.add_parser("search", help="Search for themes")
+        search_parser.add_argument("query", nargs="?", default="", help="Search query")
+    
+    async def execute(self, args: list[str]) -> int:
         """Execute theme command"""
         if not args:
             print("Usage: kardo theme <subcommand>")
