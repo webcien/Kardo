@@ -1,0 +1,2 @@
+[console_scripts]
+kardo = kardocore.cli.main:main

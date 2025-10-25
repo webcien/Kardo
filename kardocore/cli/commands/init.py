@@ -38,20 +38,17 @@ class InitCommand(BaseCommand):
         
         # Create main.py
         (project_path / "main.py").write_text("""
-from kardocore.db import Database
+from kardocore.db import DatabaseManager
 from kardocore.db.adapters import SQLiteAdapter
-from kardocore.auth import AuthManager, UserRepository
 
 async def main():
     # Initialize database
-    db = Database(SQLiteAdapter("app.db"))
-    await db.connect()
-    
-    # Initialize auth
-    user_repo = UserRepository(db)
-    auth = AuthManager(user_repo, secret_key="change-this-secret-key")
+    db = DatabaseManager()
+    db.add("default", SQLiteAdapter("app.db"), is_default=True)
+    await db.connect_all()
     
     print("✅ KardoCore initialized!")
+    print(f"✅ Database connected: {db.get().is_connected()}")
 
 if __name__ == "__main__":
     import asyncio
@@ -68,7 +65,7 @@ DEBUG = True
 """, encoding='utf-8')
         
         # Create requirements.txt
-        (project_path / "requirements.txt").write_text("""kardocore>=0.2.2
+        (project_path / "requirements.txt").write_text("""kardocore>=0.2.3
 aiosqlite>=0.19.0
 bcrypt>=4.0.0
 """, encoding='utf-8')

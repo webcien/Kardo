@@ -1,0 +1,742 @@
+Metadata-Version: 2.4
+Name: kardocore
+Version: 0.2.2
+Summary: Modern Python CMS Framework - Fast, Typed, Secure, Modular
+Home-page: https://github.com/webcien/Kardo
+Author: WebCien
+Author-email: WebCien <contact@webcien.com>
+License: MIT
+Project-URL: Homepage, https://github.com/webcien/Kardo
+Project-URL: Repository, https://github.com/webcien/Kardo
+Keywords: cms,framework,web,async,database,authentication,theme,template,modern,typed,fast,secure,modular
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Libraries :: Application Frameworks
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Framework :: AsyncIO
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: bcrypt>=4.0.0
+Requires-Dist: aiosqlite>=0.19.0
+Provides-Extra: postgresql
+Requires-Dist: asyncpg>=0.28.0; extra == "postgresql"
+Provides-Extra: mysql
+Requires-Dist: aiomysql>=0.2.0; extra == "mysql"
+Provides-Extra: admin
+Requires-Dist: bcrypt>=4.0.0; extra == "admin"
+Requires-Dist: aiosqlite>=0.19.0; extra == "admin"
+Provides-Extra: full
+Requires-Dist: bcrypt>=4.0.0; extra == "full"
+Requires-Dist: aiosqlite>=0.19.0; extra == "full"
+Provides-Extra: theme
+Requires-Dist: jinja2>=3.1.0; extra == "theme"
+Requires-Dist: markdown>=3.4.0; extra == "theme"
+Provides-Extra: all
+Requires-Dist: asyncpg>=0.28.0; extra == "all"
+Requires-Dist: aiomysql>=0.2.0; extra == "all"
+Requires-Dist: argon2-cffi>=21.3.0; extra == "all"
+Requires-Dist: jinja2>=3.1.0; extra == "all"
+Requires-Dist: markdown>=3.4.0; extra == "all"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "dev"
+Requires-Dist: black>=23.7.0; extra == "dev"
+Requires-Dist: mypy>=1.5.0; extra == "dev"
+Requires-Dist: ruff>=0.0.290; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# KardoCore
+
+**Modern Python Framework for CMS, Headless CMS, APIs and Enterprise Applications**
+
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/Version-0.0.9-orange.svg)](https://github.com/webcien/Kardo/releases/tag/v0.0.9)
+[![PyPI](https://img.shields.io/badge/PyPI-Coming%20Soon-orange.svg)](https://pypi.org/)
+[![npm](https://img.shields.io/badge/npm-Coming%20Soon-red.svg)](https://www.npmjs.com/)
+
+---
+
+## 🌟 Overview
+
+**KardoCore** is a hybrid, modular, and AI-ready Python framework designed for building modern web applications, CMS platforms, headless CMS, REST APIs, and enterprise solutions.
+
+### Key Features
+
+- ⚡ **Asynchronous ASGI Architecture** - Built for high performance
+- 🎨 **Native Template Engine (KardoTheme)** - Natural syntax with `#` prefix
+- 📦 **Package Manager** - Install and manage themes easily
+- 🔒 **Built-in Validation System** - No external dependencies
+- 🤖 **AI-Ready (KardoAI)** - Native integration for AI features
+- 🧩 **Extreme Modularity** - Use only what you need
+- 🌍 **Multi-language Support** - i18n ready
+
+---
+
+## 🎯 Installation Modes
+
+KardoCore offers **4 flexible installation modes** to fit your needs:
+
+### 1. **Core Only** - Headless CMS / REST API
+**Perfect for:** API backends, microservices, headless CMS
+
+```
+┌─────────────┐
+│  KardoCore  │  ← Core framework only
+└─────────────┘
+```
+
+**Use cases:**
+- REST API development
+- Headless CMS backend
+- Microservices
+- GraphQL servers
+- API-first applications
+
+**Installation:**
+```bash
+pip install kardocore
+```
+
+---
+
+### 2. **Core + KardoAdmin** - CMS with Admin Panel
+**Perfect for:** Content management with admin interface
+
+```
+┌─────────────┐
+│  KardoCore  │
+├─────────────┤
+│ KardoAdmin  │  ← Admin panel
+└─────────────┘
+```
+
+**Use cases:**
+- Content management systems
+- Admin dashboards
+- User management
+- Data administration
+- Backend management
+
+**Installation:**
+```bash
+pip install kardocore[admin]
+```
+
+---
+
+### 3. **Core + Admin + Theme** - Full CMS (Complete Solution)
+**Perfect for:** Full-featured websites and CMS platforms
+
+```
+┌─────────────┐
+│  KardoCore  │
+├─────────────┤
+│ KardoAdmin  │
+├─────────────┤
+│ KardoTheme  │  ← Frontend templates
+└─────────────┘
+```
+
+**Use cases:**
+- Complete CMS platforms
+- Corporate websites
+- E-commerce sites
+- Blogs and portfolios
+- Multi-page applications
+
+**Installation:**
+```bash
+pip install kardocore[full]
+```
+
+---
+
+### 4. **KardoTheme Only** - Frontend Only
+**Perfect for:** Static sites, frontend-only projects
+
+```
+┌─────────────┐
+│ KardoTheme  │  ← Template engine only
+└─────────────┘
+```
+
+**Use cases:**
+- Static site generation
+- Frontend templates
+- Email templates
+- PDF generation
+- Report generation
+
+**Installation:**
+```bash
+pip install kardotheme
+```
+
+---
+
+## 🚀 Quick Start
+
+### Installation Options
+
+**From PyPI (Recommended):**
+```bash
+# Core only
+pip install kardocore
+
+# With admin panel
+pip install kardocore[admin]
+
+# Full CMS (Core + Admin + Theme)
+pip install kardocore[full]
+
+# Theme engine only
+pip install kardotheme
+```
+
+**From GitHub:**
+```bash
+# Stable version (Python 3.11+)
+pip install git+https://github.com/webcien/Kardo.git@v0.0.9
+
+# Development version (Python 3.14+)
+pip install git+https://github.com/webcien/Kardo.git@main
+```
+
+**With npm (for frontend assets):**
+```bash
+# Install KardoCSS
+npm install @kardo/css
+
+# Install KardoTheme compiler
+npm install @kardo/theme-compiler
+```
+
+---
+
+## 📋 Version Information
+
+KardoCore is available in **two versions** to support different Python environments:
+
+### 🎯 v0.0.9 (Stable) - **RECOMMENDED FOR PRODUCTION**
+- **Python**: >= 3.11
+- **Status**: Stable and production-ready
+- **Branch**: `v0.0.9`
+- **Compatible with**: Python 3.11, 3.12, 3.13, 3.14+
+
+### 🚀 v0.1.0-alpha (Development)
+- **Python**: >= 3.14
+- **Status**: Active development
+- **Branch**: `main`
+- **Features**: Uses Python 3.14 modern features (PEP 649/749)
+
+**📖 [See detailed version comparison →](VERSION_INFO.md)**
+
+---
+
+## 💡 Usage Examples
+
+### Mode 1: Core Only (Headless API)
+
+```python
+from kardocore import KardoApp
+
+app = KardoApp()
+
+@app.route("/api/posts")
+async def get_posts(request):
+    return {
+        "posts": [
+            {"id": 1, "title": "First Post"},
+            {"id": 2, "title": "Second Post"}
+        ]
+    }
+
+if __name__ == "__main__":
+    app.run()
+```
+
+---
+
+### Mode 2: Core + Admin
+
+```python
+from kardocore import KardoApp
+from kardocore.admin import KardoAdmin
+
+app = KardoApp()
+admin = KardoAdmin(app)
+
+# Register models for admin
+@admin.register
+class Post:
+    title: str
+    content: str
+    published: bool
+
+if __name__ == "__main__":
+    app.run()
+```
+
+Access admin at: `http://localhost:8000/admin`
+
+---
+
+### Mode 3: Full CMS (Core + Admin + Theme)
+
+```python
+from kardocore import KardoApp
+from kardocore.admin import KardoAdmin
+from kardocore.theme import KardoTheme
+
+app = KardoApp()
+admin = KardoAdmin(app)
+theme = KardoTheme(template_dir="templates")
+
+@app.route("/")
+async def index(request):
+    context = {
+        "title": "Welcome",
+        "posts": Post.objects.all()
+    }
+    return theme.render("index.html", context)
+
+if __name__ == "__main__":
+    app.run()
+```
+
+---
+
+### Mode 4: Theme Only (Frontend)
+
+```python
+from kardotheme import KardoTheme
+
+theme = KardoTheme(template_dir="templates")
+
+# Render template
+html = theme.render("page.html", {
+    "title": "My Page",
+    "content": "Hello World"
+})
+
+# Save to file
+with open("output.html", "w") as f:
+    f.write(html)
+```
+
+---
+
+## 🤖 KardoAI - AI Integration
+
+**KardoAI** is the native AI integration layer for KardoCore, providing seamless AI capabilities across all modes.
+
+### Key Features
+
+- 🧠 **Content Generation** - AI-powered content creation
+- 🔍 **Smart Search** - Semantic search with embeddings
+- 💬 **Chatbots** - Integrated conversational AI
+- 🎨 **Image Generation** - AI image creation and editing
+- 📝 **Auto-completion** - Smart text suggestions
+- 🌐 **Translation** - Multi-language AI translation
+- 📊 **Analytics** - AI-powered insights
+
+### How KardoAI Works
+
+```
+┌──────────────────────────────────────┐
+│          Your Application            │
+│                                      │
+│  ┌────────────────────────────────┐ │
+│  │         KardoCore              │ │
+│  │  ┌──────────────────────────┐  │ │
+│  │  │       KardoAI            │  │ │
+│  │  │  ┌────────────────────┐  │  │ │
+│  │  │  │  AI Providers      │  │  │ │
+│  │  │  │  - OpenAI          │  │  │ │
+│  │  │  │  - Anthropic       │  │  │ │
+│  │  │  │  - Google AI       │  │  │ │
+│  │  │  │  - Local Models    │  │  │ │
+│  │  │  └────────────────────┘  │  │ │
+│  │  └──────────────────────────┘  │ │
+│  └────────────────────────────────┘ │
+└──────────────────────────────────────┘
+```
+
+### KardoAI Usage Example
+
+```python
+from kardocore import KardoApp
+from kardocore.ai import KardoAI
+
+app = KardoApp()
+ai = KardoAI(app, provider="openai")
+
+@app.route("/api/generate")
+async def generate_content(request):
+    prompt = request.json.get("prompt")
+    
+    # Generate content with AI
+    content = await ai.generate(
+        prompt=prompt,
+        max_tokens=500,
+        temperature=0.7
+    )
+    
+    return {"content": content}
+
+@app.route("/api/search")
+async def semantic_search(request):
+    query = request.json.get("query")
+    
+    # Semantic search with embeddings
+    results = await ai.search(
+        query=query,
+        collection="posts",
+        limit=10
+    )
+    
+    return {"results": results}
+
+@app.route("/api/chat")
+async def chat(request):
+    message = request.json.get("message")
+    
+    # Conversational AI
+    response = await ai.chat(
+        message=message,
+        context=request.session.get("chat_history", [])
+    )
+    
+    return {"response": response}
+```
+
+### KardoAI Configuration
+
+```python
+# config.py
+KARDOAI_CONFIG = {
+    "provider": "openai",  # openai, anthropic, google, local
+    "api_key": "your-api-key",
+    "model": "gpt-4",
+    "temperature": 0.7,
+    "max_tokens": 1000,
+    
+    # Features
+    "content_generation": True,
+    "semantic_search": True,
+    "chatbot": True,
+    "image_generation": True,
+    "translation": True,
+    
+    # Embeddings
+    "embeddings_model": "text-embedding-3-small",
+    "vector_db": "chromadb",  # chromadb, pinecone, weaviate
+    
+    # Safety
+    "content_filter": True,
+    "rate_limiting": True,
+    "cost_tracking": True
+}
+```
+
+### KardoAI in Admin Panel
+
+When using **Mode 2** or **Mode 3**, KardoAI integrates directly into the admin panel:
+
+- ✍️ **Content Editor**: AI writing assistant
+- 🖼️ **Image Library**: AI image generation
+- 🔍 **Search Bar**: Semantic search
+- 💬 **Help Chat**: AI-powered support
+- 📊 **Analytics**: AI insights and recommendations
+
+---
+
+## 🎨 Template Engine (KardoTheme)
+
+KardoCore includes a powerful native template engine with natural syntax.
+
+### Template Example
+
+**templates/index.html:**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{title}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kardo/css@latest/dist/kardo.min.css">
+</head>
+<body>
+    <h1>{title}</h1>
+    
+    #if items
+        <ul>
+        #for item in items
+            <li>{item.name} - ${item.price}</li>
+        #end
+        </ul>
+    #else
+        <p>No items available</p>
+    #end
+    
+    #include "partials/footer.html"
+</body>
+</html>
+```
+
+### Template Syntax
+
+| Syntax | Description | Example |
+|--------|-------------|---------|
+| `{variable}` | Variable interpolation | `{user.name}` |
+| `#if condition` | Conditional | `#if user.is_admin` |
+| `#else` | Else clause | `#else` |
+| `#end` | End block | `#end` |
+| `#for item in items` | Loop | `#for post in posts` |
+| `#include "file"` | Include template | `#include "header.html"` |
+| `{# comment #}` | Comment | `{# TODO: fix this #}` |
+
+---
+
+## 📦 Package Manager
+
+Install and manage themes from the official registry.
+
+### CLI Commands
+
+```bash
+# Install a theme
+kardo theme install wellness-clinic
+
+# List installed themes
+kardo theme list
+
+# Search themes
+kardo theme search health
+
+# View theme info
+kardo theme info wellness-clinic
+
+# Uninstall theme
+kardo theme uninstall wellness-clinic
+```
+
+---
+
+## 🏗️ Project Structure
+
+```
+my_project/
+├── app.py              # Main application
+├── config.py           # Configuration
+├── models/             # Data models
+│   ├── __init__.py
+│   ├── post.py
+│   └── user.py
+├── routes/             # Route handlers
+│   ├── __init__.py
+│   ├── api.py
+│   └── web.py
+├── templates/          # KardoTheme templates
+│   ├── layout.html
+│   ├── index.html
+│   └── partials/
+│       ├── header.html
+│       └── footer.html
+├── static/             # Static files
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── admin/              # Admin customization
+│   └── config.py
+├── requirements.txt
+└── package.json        # For npm dependencies
+```
+
+---
+
+## 📚 Documentation
+
+- **[Installation Guide](HOW-TO-INSTALL.md)** - Detailed installation for all modes
+- **[Quick Start Guide](QUICK-START.md)** - Get started in 5 minutes
+- **[Version Info](VERSION_INFO.md)** - Compare v0.0.9 and v0.1.0
+- **[Changelog](CHANGELOG.md)** - Version history
+- **[Contributing](CONTRIBUTING.md)** - How to contribute
+- **[KardoAI Guide](docs/KARDOAI.md)** - AI integration documentation
+
+### Language-Specific Documentation
+
+- 🇺🇸 **English**: README.md (this file)
+- 🇪🇸 **Español**: [README.es.md](README.es.md)
+
+---
+
+## 🌐 Ecosystem
+
+KardoCore is part of the **Kardo Ecosystem**:
+
+### [KardoCSS](https://github.com/webcien/KardoCSS)
+Mobile-first CSS framework with utilities and components
+- 67KB full / 50KB minified
+- 20+ components
+- 100+ utilities
+- Touch-optimized
+
+**Installation:**
+```bash
+npm install @kardo/css
+# or
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kardo/css@latest/dist/kardo.min.css">
+```
+
+### [KardoTemplates](https://github.com/webcien/KardoTemplates)
+Professional template collection for KardoCore
+- 60 templates (50 frontend + 10 backend)
+- 15 frontend categories
+- 2 backend categories
+- Mobile-first responsive
+
+**Installation:**
+```bash
+kardo theme install wellness-clinic
+```
+
+---
+
+## 🎯 Use Cases by Mode
+
+### Mode 1: Core Only
+- ✅ REST API backends
+- ✅ Headless CMS
+- ✅ Microservices
+- ✅ GraphQL servers
+- ✅ API gateways
+
+### Mode 2: Core + Admin
+- ✅ Content management
+- ✅ User administration
+- ✅ Data dashboards
+- ✅ Backend systems
+- ✅ Internal tools
+
+### Mode 3: Full CMS
+- ✅ Corporate websites
+- ✅ E-commerce platforms
+- ✅ Blogs and magazines
+- ✅ Portfolios
+- ✅ Community sites
+
+### Mode 4: Theme Only
+- ✅ Static site generation
+- ✅ Email templates
+- ✅ PDF reports
+- ✅ Documentation sites
+- ✅ Landing pages
+
+---
+
+## 🔧 Requirements
+
+### For v0.0.9 (Stable)
+- Python >= 3.11
+- uvicorn >= 0.30.0
+
+### For v0.1.0-alpha (Development)
+- Python >= 3.14
+- uvicorn >= 0.30.0
+
+### Optional Dependencies
+- **Admin Panel**: `pip install kardocore[admin]`
+- **Full CMS**: `pip install kardocore[full]`
+- **AI Features**: `pip install kardocore[ai]`
+- **All Features**: `pip install kardocore[all]`
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Development Setup
+
+```bash
+# Clone repository
+git clone https://github.com/webcien/Kardo.git
+cd Kardo
+
+# For stable version
+git checkout v0.0.9
+
+# For development version
+git checkout main
+
+# Install in development mode with all features
+pip install -e ".[all]"
+
+# Run tests
+pytest
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/webcien/Kardo/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/webcien/Kardo/discussions)
+- **Documentation**: [Full Documentation](https://kardo.dev/docs)
+- **Discord**: [Join our community](https://discord.gg/kardo)
+
+---
+
+## 🗺️ Roadmap
+
+### v0.0.9 (Current - Stable)
+- ✅ Python 3.11+ compatibility
+- ✅ Core features complete
+- ✅ 4 installation modes
+- 🔄 Bug fixes and improvements
+- 🔄 Documentation
+
+### v0.1.0-alpha (Current - Development)
+- ✅ Python 3.14+ optimizations
+- 🔄 KardoAI integration
+- 🔄 Experimental features
+- 📅 PyPI publication
+- 📅 npm packages
+
+### v1.0.0 (Future)
+- 📅 Stable unified version
+- 📅 Complete KardoAI features
+- 📅 Multi-database support
+- 📅 GraphQL support
+- 📅 WebSocket support
+- 📅 Complete documentation
+- 📅 Production-ready
+
+---
+
+## ⭐ Star History
+
+If you find KardoCore useful, please consider giving it a star on GitHub!
+
+[![Star History Chart](https://api.star-history.com/svg?repos=webcien/Kardo&type=Date)](https://star-history.com/#webcien/Kardo&Date)
+
+---
+
+**Made with ❤️ by the Kardo Team**
+
+[Website](https://kardo.dev) • [Documentation](https://kardo.dev/docs) • [Blog](https://kardo.dev/blog) • [Twitter](https://twitter.com/kardoframework)
+
