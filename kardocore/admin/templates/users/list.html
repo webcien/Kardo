@@ -1,0 +1,38 @@
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Usuarios</h1>
+    <a href="/admin/users/create" class="btn btn-primary">+ Nuevo Usuario</a>
+</div>
+
+<div class="card shadow-md">
+    <div class="overflow-x-auto">
+        <table class="table-admin">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Creado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                #for user in users
+                <tr>
+                    <td>{user.id}</td>
+                    <td>{user.email}</td>
+                    <td>{user.name}</td>
+                    <td>
+                        <span class="badge badge-{user.role}">{user.role}</span>
+                    </td>
+                    <td>{user.created_at}</td>
+                    <td class="flex gap-2">
+                        <a href="/admin/users/{user.id}/edit" class="btn-action btn-edit">Editar</a>
+                        <button class="btn-action btn-delete touch-target" onclick="deleteUser({user.id})">Eliminar</button>
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</div>

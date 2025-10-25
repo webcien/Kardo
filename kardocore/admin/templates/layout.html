@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - KardoAdmin</title>
+    <link rel="stylesheet" href="/static/kardocss/kardocss.min.css">
+</head>
+<body class="bg-gray-50">
+    #include "partials/header.html"
+    
+    <div class="flex">
+        #include "partials/sidebar.html"
+        
+        <main class="admin-content">
+            <div class="admin-container">
+                {# content #}
+            </div>
+        </main>
+    </div>
+    
+    <script src="/admin/static/js/admin.js"></script>
+</body>
+</html>

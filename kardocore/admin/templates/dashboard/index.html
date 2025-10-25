@@ -1,0 +1,32 @@
+<h1 class="text-3xl font-bold mb-6">Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+    <div class="stat-card">
+        <div class="stat-label">Usuarios</div>
+        <div class="stat-value text-blue-600">{stats.users}</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-label">Posts</div>
+        <div class="stat-value text-green-600">{stats.posts}</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-label">Páginas</div>
+        <div class="stat-value text-purple-600">{stats.pages}</div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-label">Archivos</div>
+        <div class="stat-value text-orange-600">{stats.files}</div>
+    </div>
+</div>
+
+<div class="card shadow-md">
+    <div class="card-header bg-white border-b">
+        <h2 class="text-xl font-bold">Actividad Reciente</h2>
+    </div>
+    <div class="card-body">
+        <p class="text-gray-600">No hay actividad reciente.</p>
+    </div>
+</div>
