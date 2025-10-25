@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kardocore"
-version = "0.2.0"
+version = "0.2.1"
 description = "Modern Python CMS Framework - Fast, Typed, Secure, Modular"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -33,9 +33,41 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Database adapters
 postgresql = ["asyncpg>=0.28.0"]
-all = ["asyncpg>=0.28.0", "argon2-cffi>=21.3.0"]
-dev = ["pytest>=7.4.0", "pytest-asyncio>=0.21.0", "black>=23.7.0"]
+mysql = ["aiomysql>=0.2.0"]
+
+# Installation modes
+admin = [
+    "bcrypt>=4.0.0",
+    "aiosqlite>=0.19.0",
+]
+full = [
+    "bcrypt>=4.0.0",
+    "aiosqlite>=0.19.0",
+]
+theme = [
+    "jinja2>=3.1.0",
+    "markdown>=3.4.0",
+]
+
+# All optional dependencies
+all = [
+    "asyncpg>=0.28.0",
+    "aiomysql>=0.2.0",
+    "argon2-cffi>=21.3.0",
+    "jinja2>=3.1.0",
+    "markdown>=3.4.0",
+]
+
+# Development dependencies
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.7.0",
+    "mypy>=1.5.0",
+    "ruff>=0.0.290",
+]
 
 [project.urls]
 Homepage = "https://github.com/webcien/Kardo"
