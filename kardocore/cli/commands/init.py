@@ -68,7 +68,7 @@ DEBUG = True
 """)
         
         # Create requirements.txt
-        (project_path / "requirements.txt").write_text("""kardocore>=0.2.0
+        (project_path / "requirements.txt").write_text("""kardocore>=0.2.1
 aiosqlite>=0.19.0
 bcrypt>=4.0.0
 """)

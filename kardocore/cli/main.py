@@ -7,6 +7,7 @@ Main entry point for the kardo command.
 import sys
 import asyncio
 from typing import List, Optional
+import kardocore
 from kardocore.cli.commands import (
     InitCommand,
     ServeCommand,
@@ -66,7 +67,7 @@ Documentation: https://github.com/webcien/Kardo
     
     def print_version(self):
         """Print version information"""
-        print("KardoCore v0.2.0")
+        print(f"KardoCore v{kardocore.__version__}")
         print("Python CMS Framework")
         print("https://github.com/webcien/Kardo")
     
