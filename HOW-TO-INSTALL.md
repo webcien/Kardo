@@ -12,9 +12,10 @@ Complete installation guide for all KardoCore modes and configurations.
 4. [Mode 2: Core + Admin](#mode-2-core--admin)
 5. [Mode 3: Full CMS (Core + Admin + Theme)](#mode-3-full-cms-core--admin--theme)
 6. [Mode 4: Theme Only](#mode-4-theme-only)
-7. [npm Installation](#npm-installation)
-8. [Configuration](#configuration)
-9. [Troubleshooting](#troubleshooting)
+7. [CLI Installation](#cli-installation)
+8. [npm Installation](#npm-installation)
+9. [Configuration](#configuration)
+10. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -45,7 +46,8 @@ Complete installation guide for all KardoCore modes and configurations.
 KardoCore can be installed via:
 1. **PyPI** (Recommended for production)
 2. **GitHub** (For latest features)
-3. **npm** (For frontend assets)
+3. **CLI** (Recommended for quick project setup)
+4. **npm** (For frontend assets)
 
 ---
 
@@ -68,6 +70,16 @@ pip install git+https://github.com/webcien/Kardo.git@v0.0.9
 **From GitHub (development):**
 ```bash
 pip install git+https://github.com/webcien/Kardo.git@main
+```
+
+**Using CLI (Recommended):**
+```bash
+# Install KardoCore first
+pip install kardocore
+
+# Initialize project with CLI
+kardo init my-api --mode=core
+cd my-api
 ```
 
 ### Quick Start
@@ -138,6 +150,19 @@ pip install kardocore[admin]
 **From GitHub (stable):**
 ```bash
 pip install "kardocore[admin] @ git+https://github.com/webcien/Kardo.git@v0.0.9"
+```
+
+**Using CLI (Recommended):**
+```bash
+# Install KardoCore with admin
+pip install kardocore[admin]
+
+# Initialize project with CLI
+kardo init my-cms-admin --mode=admin
+cd my-cms-admin
+
+# Create admin user
+kardo user create --username=admin --email=admin@example.com --role=admin
 ```
 
 ### Quick Start
@@ -245,6 +270,28 @@ pip install kardocore[full]
 **From GitHub (stable):**
 ```bash
 pip install "kardocore[full] @ git+https://github.com/webcien/Kardo.git@v0.0.9"
+```
+
+**Using CLI (Recommended):**
+```bash
+# Install KardoCore full
+pip install kardocore[full]
+
+# Initialize complete CMS project with CLI
+kardo init my-full-cms --mode=full --name="My CMS"
+cd my-full-cms
+
+# Install a theme
+kardo theme install wellness-clinic
+
+# Create admin user
+kardo user create --username=admin --email=admin@example.com --role=admin
+
+# Run migrations
+kardo migrate up
+
+# Start development server
+kardo serve
 ```
 
 ### Quick Start
@@ -373,6 +420,25 @@ pip install kardotheme
 pip install git+https://github.com/webcien/Kardo.git@v0.0.9#subdirectory=kardotheme
 ```
 
+**Using CLI (Recommended):**
+```bash
+# Install kardotheme
+pip install kardotheme
+
+# Initialize theme-only project
+kardo init my-static-site --mode=theme
+cd my-static-site
+
+# List available themes
+kardo theme list --available
+
+# Install a theme
+kardo theme install wellness-clinic
+
+# Build static site
+kardo build
+```
+
 ### Quick Start
 
 1. Create a new project:
@@ -439,6 +505,205 @@ python build.py
 5. Serve locally:
 ```bash
 python -m http.server --directory dist 8000
+```
+
+---
+
+## CLI Installation
+
+The KardoCore CLI provides commands for project initialization, theme management, user administration, and more.
+
+### Installing the CLI
+
+The CLI is automatically installed when you install KardoCore:
+
+```bash
+pip install kardocore
+```
+
+Verify installation:
+```bash
+kardo --version
+```
+
+### Available CLI Commands
+
+#### 1. `kardo init` - Initialize New Project
+
+```bash
+# Core only (API/Headless)
+kardo init my-api --mode=core
+
+# Core + Admin
+kardo init my-cms --mode=admin
+
+# Full CMS (Core + Admin + Theme)
+kardo init my-site --mode=full --name="My Site"
+
+# Theme only (Static site)
+kardo init my-static --mode=theme
+```
+
+**Options:**
+- `--mode` - Installation mode: `core`, `admin`, `full`, `theme`
+- `--name` - Project display name
+- `--template` - Use a specific template
+- `--database` - Database type: `sqlite`, `postgresql`, `mysql`
+
+#### 2. `kardo serve` - Start Development Server
+
+```bash
+# Start server (default: localhost:8000)
+kardo serve
+
+# Custom host and port
+kardo serve --host=0.0.0.0 --port=3000
+
+# With auto-reload
+kardo serve --reload
+```
+
+**Options:**
+- `--host` - Server host (default: `127.0.0.1`)
+- `--port` - Server port (default: `8000`)
+- `--reload` - Enable auto-reload on file changes
+
+#### 3. `kardo theme` - Manage Themes
+
+```bash
+# List available themes
+kardo theme list --available
+
+# List installed themes
+kardo theme list
+
+# Install a theme
+kardo theme install wellness-clinic
+
+# Activate a theme
+kardo theme activate wellness-clinic
+
+# Search themes
+kardo theme search medical
+
+# Customize theme
+kardo theme customize wellness-clinic
+```
+
+**Options:**
+- `list` - List themes
+- `install <name>` - Install theme from repository
+- `activate <name>` - Set theme as active
+- `search <query>` - Search available themes
+- `customize <name>` - Open theme for customization
+
+#### 4. `kardo user` - Manage Users
+
+```bash
+# Create new user
+kardo user create --username=john --email=john@example.com --role=author
+
+# Create admin user
+kardo user create --username=admin --email=admin@example.com --role=admin
+
+# List users
+kardo user list
+
+# Change user role
+kardo user role john --role=admin
+
+# Delete user
+kardo user delete john
+```
+
+**Options:**
+- `create` - Create new user
+- `list` - List all users
+- `role <username>` - Change user role
+- `delete <username>` - Delete user
+- `--username` - Username
+- `--email` - Email address
+- `--role` - User role: `admin`, `author`, `user`, `guest`
+
+#### 5. `kardo migrate` - Database Migrations
+
+```bash
+# Run all pending migrations
+kardo migrate up
+
+# Rollback last migration
+kardo migrate down
+
+# Show migration status
+kardo migrate status
+
+# Create new migration
+kardo migrate create add_categories_table
+```
+
+**Options:**
+- `up` - Run pending migrations
+- `down` - Rollback last migration
+- `status` - Show migration status
+- `create <name>` - Create new migration file
+
+#### 6. `kardo build` - Build for Production
+
+```bash
+# Build project
+kardo build
+
+# Build with specific output directory
+kardo build --output=dist
+
+# Build and minify
+kardo build --minify
+```
+
+**Options:**
+- `--output` - Output directory (default: `dist`)
+- `--minify` - Minify assets
+- `--optimize` - Optimize images and assets
+
+### Complete CLI Workflow Example
+
+```bash
+# 1. Install KardoCore
+pip install kardocore[full]
+
+# 2. Initialize project
+kardo init my-blog --mode=full --name="My Blog"
+cd my-blog
+
+# 3. Install theme
+kardo theme install wellness-clinic
+
+# 4. Create admin user
+kardo user create --username=admin --email=admin@example.com --role=admin
+
+# 5. Run migrations
+kardo migrate up
+
+# 6. Start development server
+kardo serve --reload
+
+# 7. Build for production
+kardo build --minify
+```
+
+### CLI Help
+
+Get help for any command:
+
+```bash
+# General help
+kardo --help
+
+# Command-specific help
+kardo init --help
+kardo theme --help
+kardo user --help
+kardo migrate --help
 ```
 
 ---
