@@ -5,8 +5,10 @@ Base class for all database migrations.
 """
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
-from kardocore.db import Database
+from typing import List, Dict, Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from kardocore.db.connection import DatabaseManager
 
 
 class Migration(ABC):
@@ -17,12 +19,12 @@ class Migration(ABC):
     description: str = ""
     
     @abstractmethod
-    async def up(self, db: Database):
+    async def up(self, db: 'DatabaseManager'):
         """Apply migration"""
         pass
     
     @abstractmethod
-    async def down(self, db: Database):
+    async def down(self, db: 'DatabaseManager'):
         """Rollback migration"""
         pass
     
@@ -37,7 +39,7 @@ class TableMigration(Migration):
         self.table_name = table_name
         self.columns = columns
     
-    async def up(self, db: Database):
+    async def up(self, db: 'DatabaseManager'):
         """Create table"""
         # Build CREATE TABLE SQL
         column_defs = []
@@ -60,6 +62,6 @@ class TableMigration(Migration):
         sql = f"CREATE TABLE {self.table_name} ({', '.join(column_defs)})"
         await db.execute(sql)
     
-    async def down(self, db: Database):
+    async def down(self, db: 'DatabaseManager'):
         """Drop table"""
         await db.execute(f"DROP TABLE IF EXISTS {self.table_name}")
