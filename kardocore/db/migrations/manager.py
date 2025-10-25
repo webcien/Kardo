@@ -9,14 +9,17 @@ import importlib.util
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from datetime import datetime
-from kardocore.db import Database
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from kardocore.db.connection import DatabaseManager
 from kardocore.db.migrations.base import Migration
 
 
 class MigrationManager:
     """Manage database migrations"""
     
-    def __init__(self, db: Database, migrations_dir: str = "migrations"):
+    def __init__(self, db: 'DatabaseManager', migrations_dir: str = "migrations"):
         self.db = db
         self.migrations_dir = Path(migrations_dir)
         self.migrations_table = "schema_migrations"
@@ -235,7 +238,10 @@ Created: {datetime.now().isoformat()}
 """
 
 from kardocore.db.migrations.base import Migration
-from kardocore.db import Database
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from kardocore.db.connection import DatabaseManager
 
 
 class {self._to_class_name(description)}Migration(Migration):
