@@ -56,7 +56,7 @@ async def main():
 if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
-""")
+""", encoding='utf-8')
         
         # Create config.py
         (project_path / "config.py").write_text("""
@@ -65,13 +65,13 @@ if __name__ == "__main__":
 DATABASE_URL = "sqlite:///app.db"
 SECRET_KEY = "change-this-secret-key"
 DEBUG = True
-""")
+""", encoding='utf-8')
         
         # Create requirements.txt
-        (project_path / "requirements.txt").write_text("""kardocore>=0.2.1
+        (project_path / "requirements.txt").write_text("""kardocore>=0.2.2
 aiosqlite>=0.19.0
 bcrypt>=4.0.0
-""")
+""", encoding='utf-8')
         
         # Create README.md
         (project_path / "README.md").write_text(f"""# {project_name}
@@ -84,7 +84,7 @@ KardoCore project initialized.
 pip install -r requirements.txt
 python main.py
 ```
-""")
+""", encoding='utf-8')
         
         print(f"✅ Project '{project_name}' created successfully!")
         print(f"📁 Location: {project_path}")
