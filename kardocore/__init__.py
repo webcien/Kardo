@@ -4,7 +4,7 @@ KardoCore - Modern Python CMS Framework
 Fast, Typed, Secure, Modular, Intelligent, Modern
 """
 
-__version__ = "0.2.3"
+__version__ = "0.2.4"
 __author__ = "WebCien"
 __license__ = "MIT"
 
